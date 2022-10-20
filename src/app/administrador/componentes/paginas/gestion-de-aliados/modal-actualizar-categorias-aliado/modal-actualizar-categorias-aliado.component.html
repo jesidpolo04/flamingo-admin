@@ -1,0 +1,58 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Gestionar categorías</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" *ngIf="aliado">
+        <div class="d-flex flex-gap-5 align-items-center mb-4">
+            <span class="fs-14px">Aliado: </span>
+            <span class="fs-14px fw-bold">{{aliado.nombre}}</span>
+            <div><img class="logo-aliado" [src]="aliado.logo" alt="logo-aliado"></div>
+        </div>
+        <span class="texto-naranja fs-12px fw-bold">Asignar categoría</span>
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+            <div class="border rounded p-3">
+                <div class="row">
+                    <div class="col-6">
+                        <fieldset *ngIf="this.categoria">
+                            <label for="">Nombre de la categoría</label>
+                            <input class="form-control" type="text" disabled [value]="categoria.nombre">
+                        </fieldset>
+                    </div>
+                    <div class="col-6">
+                        <fieldset>
+                            <label for="">Imagen categoría</label>
+                            <input (change)="this.cambioDeImagen($event)" type="file" class="form-control" formControlName="imagen">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <fieldset>
+                            <label for="">Enlace amigable</label>
+                            <input type="text" class="form-control" formControlName="enlaceAmigable">
+                        </fieldset>
+                    </div>
+                    <div class="col-6">
+                        <fieldset class="d-flex flex-column">
+                            <label for="">¿Categoría destacada?</label>
+                            <label class="switch">
+                                <input type="checkbox" [checked]="this.categoria?.destacada" formControlName="destacada">
+                                <span class="slider round"></span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton-flamingo rojo delineado"
+            (click)="modal.close('Close click')">Cerrar</button>
+        <button type="button" class="boton-flamingo rojo relleno" (click)="this.actualizarCategoria()">
+            Guardar cambios
+        </button>
+    </div>
+</ng-template>
+
+<app-popup #popup></app-popup>

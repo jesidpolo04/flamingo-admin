@@ -1,0 +1,17 @@
+#menu-lateral{
+}
+.contenido{
+    position: relative;
+    padding-top: var(--alto-barra-navegacion);
+    padding-left: var(--ancho-menu-lateral);
+}
+.seccion{
+    padding: 25px;
+    padding-top: 35px;
+}
+
+@media (max-width: 1024px) {
+    .contenido{
+        padding-left: 0px;
+    }
+}

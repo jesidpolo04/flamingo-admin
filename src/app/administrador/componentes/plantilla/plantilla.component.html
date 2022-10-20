@@ -1,0 +1,11 @@
+<app-menu-lateral #menuLateral id="menu-lateral"></app-menu-lateral>
+<main class="contenido">
+    <app-barra-navegacion
+        #barraDeNavegacion 
+        (menuLateralDesplegado)="this.abrirMenuLateral()"
+        (usuarioQuiereCerrarSesion)="this.cerrarSesion()" 
+        id="barra-navegacion"></app-barra-navegacion>
+    <section class="container-fluid seccion">
+        <router-outlet></router-outlet>
+    </section>
+</main>

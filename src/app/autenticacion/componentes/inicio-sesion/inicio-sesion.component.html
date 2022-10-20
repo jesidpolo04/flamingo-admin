@@ -1,0 +1,27 @@
+<div class="container-fluid fondo d-flex justify-content-center">
+    <div class="card contenedor-inicio-sesion">
+        <div class="card-body">
+            <div class="logo-aliados-flamingo">
+                <img class="img-fluid" src="assets/img/logo-aliados-color.png" alt="logo-flamingo-aliados">
+            </div>
+            <div>
+                <h2 class="fs-20px fw-bolder text-center">Ingresa tus datos para iniciar sesión</h2>
+            </div>
+            <form class="w-100">
+                <fieldset class="mb-2">
+                    <label class="fs-12px fw-semibold" for="documento">Usuario</label>
+                    <input class="form-control" type="text" name="usuario" [(ngModel)]="this.usuario" required>
+                </fieldset>
+                <fieldset class="mb-4">
+                    <label class="fs-12px fw-semibold" for="documento">Contraseña</label>
+                    <input class="form-control" type="password" name="clave" [(ngModel)]="this.contrasena" required>
+                </fieldset>
+                <fieldset>
+                    <button type="button" class="boton-flamingo rojo relleno w-100" (click)="this.iniciarSesion()" (keyup.enter)="this.iniciarSesion()">Iniciar sesión</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+

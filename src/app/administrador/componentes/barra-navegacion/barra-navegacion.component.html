@@ -1,0 +1,27 @@
+<nav class="navbar bg-light w-100 pe-3">
+    <div class="container-fluid d-flex">
+      <!-- <a class="navbar-brand">Navbar</a> -->
+      <div>
+        <span class="material-symbols-outlined" id="alternar" (click)="this.abrirMenuLateral()">
+          menu
+        </span>
+      </div>
+
+      <ul class="d-flex align-items-center mb-0 ms-auto flex-gap-10">
+        <li class="d-flex align-items-center fs-12px">
+          <span> <b>Hola</b>, Usuario</span>
+        </li>
+        <li ngbDropdown 
+            #opcionesDeUsuario="ngbDropdown" 
+            display="dynamic" 
+            class="d-flex align-items-center rounded-circle fondo-gris icono-usuario fs-12px" width="100%">
+          <a ngbDropdownToggle width="100%">
+            <img class="img-fluid" src="assets/img/icono-usuario.svg">
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu fs-12px">
+              <a ngbDropdownItem (click)="this.cerrarSesion()">Salir</a>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+</nav>

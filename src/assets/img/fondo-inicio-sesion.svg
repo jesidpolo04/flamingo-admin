@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1366" height="768" viewBox="0 0 1366 768">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectángulo_677" data-name="Rectángulo 677" width="1366" height="768" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <filter id="Trazado_579" x="281.871" y="236.799" width="1114.129" height="562.858" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-color="#630000" flood-opacity="0.678"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Trazado_578" x="-30" y="-33.257" width="1172.105" height="590.515" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-2"/>
+      <feFlood flood-color="#630000" flood-opacity="0.678"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Trazado_581" x="-30" y="-30" width="773.28" height="400.261" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-3"/>
+      <feFlood flood-color="#630000" flood-opacity="0.678"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Trazado_580" x="622.72" y="399.396" width="773.28" height="400.261" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-4"/>
+      <feFlood flood-color="#630000" flood-opacity="0.678"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Enmascarar_grupo_70" data-name="Enmascarar grupo 70" clip-path="url(#clip-path)">
+    <g id="Grupo_1460" data-name="Grupo 1460">
+      <rect id="Rectángulo_674" data-name="Rectángulo 674" width="1366" height="768" fill="#ff7f00"/>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trazado_579)">
+        <path id="Trazado_579-2" data-name="Trazado 579" d="M-13739,7332.6l1054.129-502.858H-13739Z" transform="translate(-12373 7599.4) rotate(180)" fill="#ff7f00"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trazado_578)">
+        <path id="Trazado_578-2" data-name="Trazado 578" d="M-13739,7360.258l1112.105-530.515H-13739Z" transform="translate(13739 -6833)" fill="#ff7f00"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trazado_581)">
+        <path id="Trazado_581-2" data-name="Trazado 581" d="M-13739,7170l713.28-340.261H-13739Z" transform="translate(13739 -6829.74)" fill="#ff7f00"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trazado_580)">
+        <path id="Trazado_580-2" data-name="Trazado 580" d="M-13739,7170l713.28-340.261H-13739Z" transform="translate(-12373 7599.4) rotate(180)" fill="#ff7f00"/>
+      </g>
+    </g>
+  </g>
+</svg>

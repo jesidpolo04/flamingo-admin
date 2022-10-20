@@ -1,0 +1,34 @@
+<aside class="menu-lateral p-3 d-flex flex-column" [ngClass]="{'abierto': this.desplegado, 'cerrado': !this.desplegado}">
+    <span class="material-symbols-outlined" id="cerrar-menu-lateral" (click)="this.cerrar()">
+        close
+    </span>
+    <div class="logo d-flex justify-content-start mb-4">
+        <img class="pointer-events-none cursor-pointer" src="assets/img/logo-aliados.svg" alt="">
+    </div>
+    <div class="d-flex flex-column mt-4">
+        <div class="d-flex">
+            <span class="me-2">
+                <img class="icono-20px" src="assets/img/icono-panel.svg" alt="">
+            </span>
+            <span class="fs-14px fw-semibold">
+                Panel de control
+            </span>
+        </div>
+    </div>
+    <hr>
+    <section class="seccion-menu">
+        <a  class="titulo-seccion cursor-pointer fs-14px fw-semibold"
+            (click)="collapse.toggle()" 
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample">
+                <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: !isCollapsed}">
+                Gestion
+        </a>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <ul>
+                <li class="fs-12px" [routerLink]="['/administrar', 'aliados']">Aliados</li>
+                <li class="fs-12px" [routerLink]="['/administrar', 'categorias']">Categorias</li>
+            </ul>
+        </div>
+    </section>
+</aside>

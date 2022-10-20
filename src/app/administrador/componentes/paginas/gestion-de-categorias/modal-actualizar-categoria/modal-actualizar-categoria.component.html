@@ -1,0 +1,26 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Editar categoría</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+            <div class="row">
+                <div class="col-12">
+                    <fieldset>
+                        <label for="">Nombre de la categoria</label>
+                        <input type="text" class="form-control" formControlName="nombre">
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cerrar</button>
+        <button type="button" class="boton-flamingo rojo relleno" (click)="this.actualizarCategoria()">
+            Guardar cambios
+        </button>
+    </div>
+</ng-template>
+
+<app-popup #popup></app-popup>
