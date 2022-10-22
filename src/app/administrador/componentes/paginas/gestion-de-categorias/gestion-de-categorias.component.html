@@ -31,7 +31,8 @@
                         <div class="d-flex justify-self-end flex-gap-5 ms-auto">
                             <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
                             <span class="texto-gris fs-12px fw-bold align-items-center">
-                                <select class="form-select sm" name="" id="">
+                                <select #porPagina class="form-select sm" name="" id="" (change)="this.cambiarPaginado(porPagina.value)">
+                                    <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
                                     <option value="20">20</option>

@@ -69,7 +69,7 @@ export class AliadosService extends Autenticable {
   }
 
   public listarCategorias(idAliado:string){
-    const endpoint = `/api/v1/aliados/buscar/${idAliado}`
+    const endpoint = `/api/v1/aliados/buscar/${idAliado}?esAdministrador=true`
     return this.clienteHttp.get<{categorias:CategoriaAliado[]}>(`${this.urlBackend}${endpoint}`, {headers: this.cabecerasHttp})
   }
 

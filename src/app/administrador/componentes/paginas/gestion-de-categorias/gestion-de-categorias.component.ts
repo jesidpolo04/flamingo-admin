@@ -39,7 +39,7 @@ export class GestionDeCategoriasComponent implements OnInit {
 
   public filtrarCategorias(termino:string, categorias:Categoria[]):Categoria[]{
     if(termino === '') return categorias;
-    else return categorias.filter(categoria => categoria.nombre.includes(termino));
+    else return categorias.filter(categoria => categoria.nombre.toLowerCase().includes(termino.toLocaleLowerCase()));
   }
 
   public obtenerCategoriasPorFiltro():void{
@@ -59,6 +59,12 @@ export class GestionDeCategoriasComponent implements OnInit {
   public cambioDePagina(pagina:number){
     this.pagina = pagina
     this.obtenerCategoriasPorFiltro()
+  }
+
+  public cambiarPaginado(porPagina:string){
+    const porPaginaNumero = parseInt(porPagina)
+    this.limite = porPaginaNumero;
+    this.obtenerCategoriasPorFiltro();
   }
 
   public abrirModalCreacionCategoria(){

@@ -47,7 +47,7 @@ export class CategoriasService extends Autenticable{
   }
 
   public actualizarCategoria(id:string, nombre:string):Observable<any>{
-    const endpoint = `/api/v1/categorias/${id}`
+    const endpoint = `/api/v1/categorias/${id}?esAdministrador=true`
     return this.clienteHttp.put(`${this.urlBackend}${endpoint}`, {nombre}, {headers: this.cabecerasHttp})
   }
 }

@@ -40,6 +40,12 @@ export class GestionDeAliadosComponent implements OnInit {
     }) 
   }
 
+  public cambiarPaginado(porPagina:string){
+    const porPaginaNumero = parseInt(porPagina)
+    this.limite = porPaginaNumero;
+    this.refrescarListaDeAliados();
+  }
+
   public cambiarEstadoAliado(indexAliado:number):void{
     console.log('cambiando estado aliado', indexAliado)
     this.servicioAliados.cambiarEstadoAliado(this.aliados[indexAliado].id).subscribe((respuesta:any)=>{
