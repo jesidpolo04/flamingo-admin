@@ -231,7 +231,6 @@ input[type=number] {
   font-family: inherit;
   font-size: 1rem;
 }
-
 .resumen{
   display: flex;
   flex-direction: column;
@@ -247,4 +246,10 @@ input[type=number] {
 .resumen img{
   width: 50px;
   height: auto;
+}
+
+.validacion{
+  width: 100%;
+  color: var(--rojo-flamingo);
+  font-size: 12px;
 }
