@@ -20,12 +20,26 @@
                                 <select class="form-select" name="" formControlName="categoria" aria-placeholder="Seleccionar">
                                     <option *ngFor="let categoria of this.categorias" [value]="categoria.id">{{categoria.nombre}}</option>
                                 </select>
+                                <span class="validacion"
+                                    *ngIf="
+                                    this.formulario.controls['categoria'].errors &&
+                                    this.formulario.controls['categoria'].errors['required'] && 
+                                    this.formulario.controls['categoria'].dirty">
+                                    Selecciona una categoría.
+                                </span>
                             </fieldset>
                         </div>
                         <div class="col-6">
                             <fieldset>
                                 <label for="">Imagen categoría</label>
                                 <input (change)="this.cambioDeImagen($event)" accept="image/*" type="file" class="form-control" formControlName="imagen">
+                                <span class="validacion"
+                                    *ngIf="
+                                    this.formulario.controls['imagen'].errors &&
+                                    this.formulario.controls['imagen'].errors['required'] &&
+                                    this.formulario.controls['imagen'].dirty">
+                                    Selecciona una imagen.
+                                </span>
                             </fieldset>
                         </div>
                     </div>
@@ -34,6 +48,13 @@
                             <fieldset>
                                 <label for="">Enlace amigable</label>
                                 <input type="text" class="form-control" formControlName="enlaceAmigable">
+                                <span class="validacion"
+                                    *ngIf="
+                                    this.formulario.controls['enlaceAmigable'].errors &&
+                                    this.formulario.controls['enlaceAmigable'].errors!['required'] && 
+                                    this.formulario.controls['enlaceAmigable'].dirty">
+                                    Requerido.
+                                </span>
                             </fieldset>
                         </div>
                         <div class="col-6">

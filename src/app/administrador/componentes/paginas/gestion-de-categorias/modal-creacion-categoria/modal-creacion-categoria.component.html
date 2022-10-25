@@ -10,7 +10,15 @@
                     <fieldset>
                         <label for="">Nombre de la categoria</label>
                         <input type="text" class="form-control" formControlName="nombre">
+                        <span class="validacion"
+                        *ngIf="
+                            this.formulario.controls['nombre'].errors &&
+                            this.formulario.controls['nombre'].errors['required'] && 
+                            this.formulario.controls['nombre'].dirty">
+                            Requerido.
+                        </span>
                     </fieldset>
+                    
                 </div>
             </div>
         </form>

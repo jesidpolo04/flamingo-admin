@@ -31,6 +31,13 @@
                         <fieldset>
                             <label for="">Enlace amigable</label>
                             <input type="text" class="form-control" formControlName="enlaceAmigable">
+                            <span class="validacion"
+                                *ngIf="
+                                this.formulario.controls['enlaceAmigable'].errors &&
+                                this.formulario.controls['enlaceAmigable'].errors['required'] && 
+                                this.formulario.controls['enlaceAmigable'].dirty">
+                                Requerido.
+                            </span>
                         </fieldset>
                     </div>
                     <div class="col-6">

@@ -35,7 +35,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
       imagen: new FormControl('', [Validators.required]),
       recursoImagen: new FormControl('', [Validators.required]),
       enlaceAmigable: new FormControl('', [Validators.required]),
-      destacada: new FormControl('', [Validators.required]),
+      destacada: new FormControl(''),
     })
   }
 
@@ -46,6 +46,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
   }
 
   public abrir(aliado:Aliado){
+    this.limpiarFormulario()
     this.aliado = aliado
     this.servicioAliados.listarCategorias(this.aliado.id).subscribe(respuesta =>{
       this.categoriasDeAliado = respuesta.categorias
@@ -76,6 +77,15 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     this.formulario.reset()
   }
 
+  public marcarFormularioComoSucio():void{
+    (<any>Object).values(this.formulario.controls).forEach((control:FormControl) => {
+      control.markAsDirty();
+      if (control) {
+        control.markAsDirty()
+      }
+    });
+  }
+
   public refrescarListaDeCategorias():void{
     if(this.aliado){
       this.servicioAliados.listarCategorias(this.aliado.id).subscribe(respuesta => {
@@ -85,7 +95,11 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
   }
 
   public asignarCategoria():void{
-    if(this.formulario.invalid) return;
+    if(this.formulario.invalid){
+      this.popup.abrirPopupFallido('Formulario inválido','rellena todos los campos correctamente.')
+      this.marcarFormularioComoSucio()
+      return;
+    }
     this.servicioAliados.asignarCategoria(new PeticionAsignarCategorias(
       this.formulario.controls['recursoImagen'].value,
       this.formulario.controls['categoria'].value,
@@ -96,7 +110,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
       this.refrescarListaDeCategorias()
       this.popup.abrirPopupExitoso('Guardado con éxito')
     }, (error:HttpErrorResponse) =>{
-      this.popup.abrirPopupFallido('Error')
+      this.popup.abrirPopupFallido('Error', error.error.mensaje)
     })
   }
 

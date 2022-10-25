@@ -3,6 +3,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
+import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { PopupComponent } from '../../../popup/popup.component';
 
 @Component({
@@ -27,6 +28,7 @@ export class ModalCreacionCategoriaComponent implements OnInit {
   }
 
   public abrir():void{
+    this.limpiarFormulario()
     this.servicioModal.open(this.modal, {size: 'lg'})
   }
 
@@ -39,7 +41,11 @@ export class ModalCreacionCategoriaComponent implements OnInit {
   }
 
   public crearCategoria(){
-    if(this.formulario.invalid) return;
+    if(this.formulario.invalid) {
+      this.popup.abrirPopupFallido('Formulario inválido', 'Rellena todos los campos correctamente.')
+      this.formulario = marcarFormularioComoSucio(this.formulario)
+      return
+    };
     this.servicioCategorias.crearCategoria(this.formulario.controls['nombre'].value).subscribe(respuesta => {
       this.seHaCreadoUnaCategoria.emit()
       this.cerrar()

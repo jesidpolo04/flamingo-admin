@@ -6,6 +6,7 @@ import { Aliado } from 'src/app/administrador/modelos/aliados/Aliado';
 import { CategoriaAliado } from 'src/app/administrador/modelos/aliados/CategoriaAliado';
 import { PeticionActualizarCategoriaAliado } from 'src/app/administrador/modelos/aliados/PeticionActualizarCategoriaAliado';
 import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
+import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { PopupComponent } from '../../../popup/popup.component';
 
 @Component({
@@ -58,6 +59,11 @@ export class ModalActualizarCategoriasAliadoComponent implements OnInit {
   }
 
   public actualizarCategoria(){
+    if(this.formulario.invalid){
+      this.popup.abrirPopupFallido('Formulario inválido', 'Rellena todos los campos correctamente.')
+      this.formulario = marcarFormularioComoSucio(this.formulario)
+      return;
+    }
     this.servicioCategorias.actualizarCategoriaAliado(
       this.aliado!.id,
       this.categoria!.id, new PeticionActualizarCategoriaAliado(
@@ -83,7 +89,6 @@ export class ModalActualizarCategoriasAliadoComponent implements OnInit {
       this.formulario.patchValue({
         recursoImagen: file
       });
-      console.log(this.formulario)
     }
   }
 }
