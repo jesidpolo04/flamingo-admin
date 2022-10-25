@@ -35,6 +35,8 @@ export class ModalCreacionAliadoComponent implements OnInit {
   }
 
   public abrir():void{
+    this.limpiarFormulario()
+    this.formulario.controls['orden'].setValue(1)
     this.servicioModal.open(this.modalCreacionAliado, {
       size: 'xl'
     })
@@ -57,6 +59,10 @@ export class ModalCreacionAliadoComponent implements OnInit {
   }
   
   public crearAliado(){
+    if(this.formulario.invalid){
+      this.popup.abrirPopupFallido('Formulario Inválido', 'Rellena correctamente todos los campos.')
+      this.marcarFormularioComoSucio()
+    }
     if(this.formulario.valid){
       this.servicioAliados.crearAliado(new PeticionCrearAliado(
         this.formulario.controls['orden'].value,
@@ -79,6 +85,15 @@ export class ModalCreacionAliadoComponent implements OnInit {
 
   public limpiarFormulario(){
     this.formulario.reset()
+  }
+
+  public marcarFormularioComoSucio():void{
+    (<any>Object).values(this.formulario.controls).forEach((control:FormControl) => {
+      control.markAsDirty();
+      if (control) {
+        control.markAsDirty()
+      }
+    });
   }
 
 }

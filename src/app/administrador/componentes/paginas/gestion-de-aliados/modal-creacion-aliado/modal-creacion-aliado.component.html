@@ -10,24 +10,44 @@
                     <fieldset>
                         <label for="">Orden</label>
                         <input type="number" class="form-control" formControlName="orden">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['orden'].invalid && 
+                            this.formulario.controls['orden'].dirty">
+                            Requerido.
+                        </span>
                     </fieldset>
                 </div>
                 <div class="col-5">
                     <fieldset>
                         <label for="">Nombre del aliado</label>
                         <input type="text" class="form-control" formControlName="nombre">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['nombre'].invalid && 
+                            this.formulario.controls['nombre'].dirty">
+                            Nombre requerido.
+                        </span>
                     </fieldset>
                 </div>
                 <div class="col-5">
                     <fieldset>
                         <label for="">NIT</label>
                         <input type="number" class="form-control" formControlName="nit">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['nit'].invalid && 
+                            this.formulario.controls['nit'].dirty">
+                            NIT requerido.
+                        </span>
                     </fieldset>
                 </div>
                 <div class="col-1">
                     <fieldset>
                         <label for="">Comisión</label>
                         <input type="text" class="form-control" formControlName="comision">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['comision'].invalid && 
+                            this.formulario.controls['comision'].dirty">
+                            Requerido.
+                        </span>
                     </fieldset>
                 </div>
             </div>
@@ -36,18 +56,33 @@
                     <fieldset>
                         <label for="">Enlace amigable</label>
                         <input type="text" class="form-control" formControlName="enlaceAmigable">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['enlaceAmigable'].invalid && 
+                            this.formulario.controls['enlaceAmigable'].dirty">
+                            Enlace requerido.
+                        </span>
                     </fieldset>
                 </div>
                 <div class="col-5">
                     <fieldset>
                         <label for="">Logo</label>
                         <input type="file" class="form-control" accept="image/*" formControlName="logo" (change)="this.cambioDeLogo($event)">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['logo'].invalid && 
+                            this.formulario.controls['logo'].dirty">
+                            Selecciona una imagen.
+                        </span>
                     </fieldset>
                 </div>
                 <div class="col-5">
                     <fieldset>
                         <label for="">Tiempo</label>
                         <input type="number" class="form-control" formControlName="tiempo">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['tiempo'].invalid && 
+                            this.formulario.controls['tiempo'].dirty">
+                            Requerido.
+                        </span>
                     </fieldset>
                 </div>
             </div>
