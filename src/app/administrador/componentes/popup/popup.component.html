@@ -1,7 +1,7 @@
 <swal #exitoso>
     <div *swalPortal="undefined">
         <div class="card-header d-flex">
-            <span class="ms-auto btn-close"></span>
+            <span class="ms-auto btn-close" (click)="this.cerrarPopupExitoso()"></span>
         </div>
         <div class="d-flex flex-column card-body flex-gap-10 pb-3">
             <h3 class="texto-naranja fs-20px fw-bold">{{tituloExito}}</h3>
@@ -21,7 +21,7 @@
 <swal #fallido>
     <div *swalPortal="undefined">
         <div class="card-header d-flex">
-            <span class="ms-auto btn-close"></span>
+            <span class="ms-auto btn-close" (click)="this.cerrarPopupFallido()"></span>
         </div>
         <div class="d-flex flex-column card-body flex-gap-20 pb-3">
             <h3 class="texto-naranja fs-20px fw-bold">{{tituloFallido}}</h3>
@@ -31,7 +31,7 @@
             <span class="fs-18px fw-semibold" *ngIf="infoFallido">{{infoFallido}}</span>
         </div>
         <div class="card-footer">
-            <button class="boton-flamingo rojo relleno" (click)="this.cerrarPopupExitoso()">Aceptar</button>
+            <button class="boton-flamingo rojo relleno" (click)="this.cerrarPopupFallido()">Aceptar</button>
         </div>
     </div>
 </swal>

@@ -54,6 +54,7 @@ export class PopupComponent implements OnInit {
   }
 
   public cerrarPopupFallido(){
+    console.log('cerrando popup')
     this.popupFallido.close()
   }
 
