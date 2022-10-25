@@ -22,6 +22,21 @@
             [attr.aria-expanded]="!isCollapsed"
             aria-controls="collapseExample">
                 <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: !isCollapsed}">
+                Tableros
+        </a>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <ul>
+                <li class="fs-12px" [routerLink]="['/administrar', 'trafico']">Tráfico de clientes</li>
+                <li class="fs-12px" [routerLink]="['/administrar', 'ventas']">Reporte de ventas</li>
+            </ul>
+        </div>
+    </section>
+    <section class="seccion-menu">
+        <a  class="titulo-seccion cursor-pointer fs-14px fw-semibold"
+            (click)="collapse.toggle()" 
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample">
+                <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: !isCollapsed}">
                 Gestion
         </a>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">

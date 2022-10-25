@@ -17,6 +17,9 @@ import { ModalCreacionCategoriaComponent } from './componentes/paginas/gestion-d
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PopupComponent } from './componentes/popup/popup.component';
 import { ModalActualizarCategoriaComponent } from './componentes/paginas/gestion-de-categorias/modal-actualizar-categoria/modal-actualizar-categoria.component';
+import { ResumenTraficoClientesComponent } from './componentes/paginas/resumen-trafico-clientes/resumen-trafico-clientes.component';
+import { TraficoClientesComponent } from './componentes/paginas/trafico-clientes/trafico-clientes.component';
+import { ReporteVentasComponent } from './componentes/paginas/reporte-ventas/reporte-ventas.component';
 
 
 
@@ -34,6 +37,9 @@ import { ModalActualizarCategoriaComponent } from './componentes/paginas/gestion
     ModalCreacionCategoriaComponent,
     PopupComponent,
     ModalActualizarCategoriaComponent,
+    ResumenTraficoClientesComponent,
+    TraficoClientesComponent,
+    ReporteVentasComponent,
   ],
   imports: [
     CommonModule,
