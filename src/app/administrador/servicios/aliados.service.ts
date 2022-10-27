@@ -16,20 +16,18 @@ import { Autenticable } from './compartido/Autenticable';
 })
 export class AliadosService extends Autenticable {
   private urlBackend:string
-  private cabecerasHttp:HttpHeaders
 
   constructor(private clienteHttp:HttpClient) { 
     super()
     this.urlBackend = environment.urlBackend
-    this.cabecerasHttp = new HttpHeaders({
-      Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`
-    })
   }
 
   public obtenerAliados(pagina:number, limite:number):Observable<{aliados: Aliado[], paginacion:Paginacion}>{
     const endpoint = `/api/v1/aliados/listar/${pagina}/${limite}?esAdministrador=true`
     return this.clienteHttp
-            .get<{aliados: Aliado[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.cabecerasHttp })
+            .get<{aliados: Aliado[], paginacion:Paginacion}>(
+              `${this.urlBackend}${endpoint}`, 
+              { headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} })
   }
 
   public crearAliado(aliado:PeticionCrearAliado):Observable<any>{
@@ -44,12 +42,18 @@ export class AliadosService extends Autenticable {
     formulario.append('logo', aliado.logo)
     formulario.append('tiempo', aliado.tiempo.toString())
 
-    return this.clienteHttp.post<any>(`${this.urlBackend}${endpoint}`, formulario, { headers: this.cabecerasHttp })
+    return this.clienteHttp.post<any>(
+      `${this.urlBackend}${endpoint}`, 
+      formulario, 
+      { headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} })
   }
 
   public cambiarEstadoAliado(idAliado:string):Observable<any>{
     const endpoint = `/api/v1/aliados/estado/${idAliado}?esAdministrador=true`
-    return this.clienteHttp.put<any>(`${this.urlBackend}${endpoint}`, undefined, {headers: this.cabecerasHttp})
+    return this.clienteHttp.put<any>(
+      `${this.urlBackend}${endpoint}`, 
+      undefined, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} })
   }
 
   public actualizarAliado(id:string, aliado:PeticionActualizarAliado):Observable<any>{
@@ -67,12 +71,17 @@ export class AliadosService extends Autenticable {
           }
       }
     }
-    return this.clienteHttp.put<any>(`${this.urlBackend}${endpoint}`, formulario, {headers: this.cabecerasHttp})
+    return this.clienteHttp.put<any>(
+      `${this.urlBackend}${endpoint}`
+      , formulario, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 
   public listarCategorias(idAliado:string){
     const endpoint = `/api/v1/aliados/buscar/${idAliado}?esAdministrador=true`
-    return this.clienteHttp.get<{categorias:CategoriaAliado[]}>(`${this.urlBackend}${endpoint}`, {headers: this.cabecerasHttp})
+    return this.clienteHttp.get<{categorias:CategoriaAliado[]}>(
+      `${this.urlBackend}${endpoint}`, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 
   public asignarCategoria(peticion:PeticionAsignarCategorias):Observable<any>{
@@ -85,12 +94,18 @@ export class AliadosService extends Autenticable {
     formulario.append('link_amigable_aliado', peticion.linkAmigableAliado)
     formulario.append('destacada', peticion.destacada === true ? 'true' : 'false')
     console.log(formulario)
-    return this.clienteHttp.post<any>(`${this.urlBackend}${endpoint}`, formulario, {headers: this.cabecerasHttp})
+    return this.clienteHttp.post<any>(
+      `${this.urlBackend}${endpoint}`, 
+      formulario, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 
   public cambiarEstadoCategoriaAliado(idAliado:string, idCategoria:string):Observable<any>{
     const endpoint = `/api/v1/aliados/categoria/${idAliado}/${idCategoria}?esAdministrador=true`
-    return this.clienteHttp.put<any>(`${this.urlBackend}${endpoint}`, undefined, {headers: this.cabecerasHttp})
+    return this.clienteHttp.put<any>(
+      `${this.urlBackend}${endpoint}`, 
+      undefined, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 
   public actualizarCategoriaAliado(
@@ -111,6 +126,9 @@ export class AliadosService extends Autenticable {
       }
     }
     const endpoint = `/api/v1/categorias/editar/${idAliado}/${idCategoria}?esAdministrador=true`
-    return this.clienteHttp.put<any>(`${this.urlBackend}${endpoint}`, formulario, {headers: this.cabecerasHttp})
+    return this.clienteHttp.put<any>(
+      `${this.urlBackend}${endpoint}`, 
+      formulario, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 }

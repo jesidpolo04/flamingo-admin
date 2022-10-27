@@ -35,7 +35,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
       imagen: new FormControl('', [Validators.required]),
       recursoImagen: new FormControl('', [Validators.required]),
       enlaceAmigable: new FormControl('', [Validators.required]),
-      destacada: new FormControl(''),
+      destacada: new FormControl(false),
     })
   }
 
@@ -75,6 +75,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
 
   public limpiarFormulario():void{
     this.formulario.reset()
+    this.formulario.controls['destacada'].setValue(false)
   }
 
   public marcarFormularioComoSucio():void{
@@ -100,6 +101,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
       this.marcarFormularioComoSucio()
       return;
     }
+    console.log(this.formulario.controls['destacada'].value)
     this.servicioAliados.asignarCategoria(new PeticionAsignarCategorias(
       this.formulario.controls['recursoImagen'].value,
       this.formulario.controls['categoria'].value,
@@ -124,5 +126,9 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
 
   public abrirModalActualizarCategoria(categoria:CategoriaAliado){
     this.modalActualizarCategoria.abrir(this.aliado!, categoria)
+  }
+
+  public debugDestacada(){
+    console.log(this.formulario.controls['destacada'].value) 
   }
 }

@@ -4,6 +4,7 @@ import { GestionDeAliadosComponent } from './administrador/componentes/paginas/g
 import { GestionDeCategoriasComponent } from './administrador/componentes/paginas/gestion-de-categorias/gestion-de-categorias.component';
 import { ReporteVentasComponent } from './administrador/componentes/paginas/reporte-ventas/reporte-ventas.component';
 import { ResumenTraficoClientesComponent } from './administrador/componentes/paginas/resumen-trafico-clientes/resumen-trafico-clientes.component';
+import { TraficoClientesComponent } from './administrador/componentes/paginas/trafico-clientes/trafico-clientes.component';
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
 import { AutenticacionGuard } from './guards/autenticacion.guard';
@@ -28,7 +29,11 @@ const routes: Routes = [
       },
       {
         path: 'trafico',
-        component: ResumenTraficoClientesComponent
+        component: ResumenTraficoClientesComponent,
+      },
+      {
+        path: 'trafico/detalle',
+        component: TraficoClientesComponent
       },
       {
         path: 'ventas',

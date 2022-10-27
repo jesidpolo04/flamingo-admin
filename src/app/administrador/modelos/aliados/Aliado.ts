@@ -2,6 +2,7 @@ export interface Aliado{
     id: string
     nombre: string
     logo: string
+    orden: number
     linkMarcacion: string
     linkAmigable: string
     tiempo: number,

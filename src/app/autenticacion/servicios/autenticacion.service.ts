@@ -31,6 +31,8 @@ export class AutenticacionService {
   }
 
   public guardarInformacionInicioSesion(jwt:string, expira:number, nombreUsuario:string, documentoUsuario:string):void{
+    console.log('Guardando Información de inicio de sesión')
+    console.log('Nuevo token', jwt)
     const diferenciaDeMilisegundos = expira * 60 * 1000;
     const fechaActual = new Date().getTime()
     const fechaExpiracion = new Date(fechaActual + diferenciaDeMilisegundos)

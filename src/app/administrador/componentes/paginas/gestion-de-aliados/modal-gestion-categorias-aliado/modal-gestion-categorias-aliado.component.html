@@ -61,7 +61,7 @@
                             <fieldset class="d-flex flex-column">
                                 <label for="">¿Categoría destacada?</label>
                                 <label class="switch">
-                                    <input type="checkbox" formControlName="destacada">
+                                    <input type="checkbox" formControlName="destacada" (change)="debugDestacada()">
                                     <span class="slider round"></span>
                                 </label>
                             </fieldset>
@@ -101,10 +101,10 @@
                             <td>{{categoria.linkMarcacion | slice:0:30}}</td>
                             <td><span class="copiar-portapapeles"></span></td>
                             <td>
-                                <span *ngIf="true">Sí</span>
-                                <span *ngIf="false">No</span>
+                                <span *ngIf="categoria.destacada">Sí</span>
+                                <span *ngIf="!categoria.destacada">No</span>
                             </td>
-                            <td>https://google.docs</td>
+                            <td>{{categoria.linkMarcacion | slice:0:35}}</td>
                             <td class="texto-rojo cursor-pointer" (click)="this.abrirModalActualizarCategoria(categoria)">Editar</td>
                             <td>
                                 <label class="switch">

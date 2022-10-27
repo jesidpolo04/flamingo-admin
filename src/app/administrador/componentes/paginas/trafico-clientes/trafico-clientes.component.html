@@ -1,1 +1,163 @@
-<p>trafico-clientes works!</p>
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Filtros de búsqueda</span>
+            </div>
+            <div class="card-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <span class="fs-14px texto-naranja fw-semibold">Tráfico de clientes: </span>
+                <span class="fs-14px fw-semibold">24 de octubre de 2022</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row texto-negro mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
+                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
+                <img class="icono-redireccion" src="assets/img/redirecciones.svg">
+                <span class="fs-25px fw-extrabold text-center">1500</span>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
+                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
+                <img class="icono-redireccion" src="assets/img/redirecciones.svg">
+                <span class="fs-25px fw-extrabold text-center">1500</span>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
+                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
+                <img class="icono-redireccion" src="assets/img/redirecciones.svg">
+                <span class="fs-25px fw-extrabold text-center">1500</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Clientes redirigidos por categoría</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex flex-gap-10 mb-2">
+                    <div class="d-flex flex-gap-10">
+                        <div class="d-flex align-items-center">
+                            <span class="fs-12px">Buscar</span>
+                        </div>
+                        <div>
+                            <input class="form-control sm" type="text">
+                        </div>
+                    </div>
+                    <div>
+                        <span class="texto-gris fs-12px fw-bolder">Total: </span>
+                        <span class="texto-naranja fs-12px fw-bold">100</span>
+                    </div>
+                    <div class="d-flex justify-self-end flex-gap-5 ms-auto">
+                        <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
+                        <span class="texto-gris fs-12px fw-bold align-items-center">
+                            <select #porPagina class="form-select sm" name="" id="">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </span>
+                        <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
+                    </div>
+                </div>
+                <div class="contenedor-tabla d-flex table-responsive ">
+                    <table class="table border fs-12px">
+                        <thead>
+                        <tr>
+                          <th scope="col">Aliado</th>
+                          <th scope="col">Cateogría</th>
+                          <th scope="col">Asesor</th>
+                          <th scope="col">Usuario</th>
+                          <th scope="col">Celular</th>
+                          <th scope="col">Correo</th>
+                          <th scope="col">Fecha</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">Aliado</td>
+                                <td scope="col">Cateogría</td>
+                                <td scope="col">Asesor</td>
+                                <td scope="col">Usuario</td>
+                                <td scope="col">Celular</td>
+                                <td scope="col">Correo</td>
+                                <td scope="col">Fecha</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        <button class="boton-flamingo rojo relleno">
+                            Exportar informe completo
+                        </button>
+                    </div>
+                    <div class="ms-auto">
+                        <ngb-pagination
+                        [collectionSize]="100" [pageSize]="10">
+                        </ngb-pagination>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

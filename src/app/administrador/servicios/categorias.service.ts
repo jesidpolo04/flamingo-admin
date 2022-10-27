@@ -26,7 +26,9 @@ export class CategoriasService extends Autenticable{
   public async buscarCategorias(termino:string):Promise<Categoria[]>{
     const endpoint = `/api/v1/categorias/listar`;
     const observable = this.clienteHttp
-            .get<{categorias: Categoria[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.cabecerasHttp })
+            .get<{categorias: Categoria[], paginacion:Paginacion}>(
+              `${this.urlBackend}${endpoint}`, 
+              { headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} })
     const categorias = (await firstValueFrom(observable)).categorias
     return categorias.filter(categoria => {
       return categoria.nombre.includes(termino)
@@ -38,16 +40,24 @@ export class CategoriasService extends Autenticable{
     if(!pagina && !limite) endpoint = `/api/v1/categorias/listar`;
     else endpoint = endpoint = `/api/v1/categorias/listar/${pagina}/${limite}`;
     return this.clienteHttp
-            .get<{categorias: Categoria[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.cabecerasHttp })
+            .get<{categorias: Categoria[], paginacion:Paginacion}>(
+              `${this.urlBackend}${endpoint}`, 
+              { headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} })
   }
 
   public crearCategoria(nombre:string):Observable<any>{
     const endpoint = "/api/v1/categorias?esAdministrador=true"
-    return this.clienteHttp.post(`${this.urlBackend}${endpoint}`, {nombre} , {headers: this.cabecerasHttp})
+    return this.clienteHttp.post(
+      `${this.urlBackend}${endpoint}`, 
+      {nombre} , 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 
   public actualizarCategoria(id:string, nombre:string):Observable<any>{
     const endpoint = `/api/v1/categorias/${id}?esAdministrador=true`
-    return this.clienteHttp.put(`${this.urlBackend}${endpoint}`, {nombre}, {headers: this.cabecerasHttp})
+    return this.clienteHttp.put(
+      `${this.urlBackend}${endpoint}`, 
+      {nombre}, 
+      {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`}})
   }
 }
