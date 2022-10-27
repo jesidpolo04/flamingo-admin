@@ -55,9 +55,11 @@ export class AliadosService extends Autenticable {
   public actualizarAliado(id:string, aliado:PeticionActualizarAliado):Observable<any>{
     const endpoint = `/api/v1/aliados/${id}?esAdministrador=true`
     const formulario = new FormData()
+    console.log(aliado)
     for (const key in aliado) {
       let valor = aliado[key as keyof PeticionActualizarAliado];
       if(valor != '' && valor){
+        console.log(key, valor)
           if(typeof(valor) == 'number'){
             formulario.append(key, valor.toString())
           }else{

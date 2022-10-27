@@ -81,4 +81,16 @@ export class ModalActualizacionAliadoComponent implements OnInit {
       this.popup.abrirPopupFallido('Error')
     })
   }
+
+  public cambioDeLogo(event:Event){
+    const target = event.target as HTMLInputElement;
+    if(!target) return;
+    if(!target.files) return;
+    if (target.files.length > 0) {
+      const file = target.files[0];
+      this.formulario.patchValue({
+        recursoLogo: file
+      });
+    }
+  }
 }
