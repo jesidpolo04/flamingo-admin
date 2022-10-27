@@ -117,7 +117,8 @@ export class AliadosService extends Autenticable {
     console.log(peticion)
     for (const key in peticion) {
       let valor = peticion[key as keyof PeticionActualizarCategoriaAliado];
-      if(valor != '' && valor){
+      console.log(key, typeof(valor), valor)
+      if(valor !== '' && valor !== undefined && valor !== null){
           if(typeof(valor) == 'number' || typeof(valor) == 'boolean'){
             formulario.append(key, valor.toString())
           }else{

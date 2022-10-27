@@ -86,25 +86,25 @@
                     <tr>
                       <th scope="col">Nombre</th>
                       <th scope="col">Imagen</th>
-                      <th scope="col">Enlace amigable Aliado</th>
-                      <th scope="col" colspan="2">Enlace de marcación</th>
+                      <!-- <th scope="col">Enlace amigable Aliado</th> -->
+                      <!-- <th scope="col" colspan="2">Enlace de marcación</th> -->
                       <th scope="col">¿Destacada?</th>
-                      <th scope="col">Enlace amigable categoría</th>
+                      <th scope="col" colspan="2">Enlace amigable categoría</th>
                       <th scope="col" colspan="2">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let categoria of this.categoriasDeAliado; let indice = index">
                             <td>{{categoria.nombre}}</td>
-                            <td>{{categoria.imagen | slice:0:30}}</td>
-                            <td>{{categoria.linkAmigableAliado | slice:0:30}}</td>
-                            <td>{{categoria.linkMarcacion | slice:0:30}}</td>
-                            <td><span class="copiar-portapapeles"></span></td>
+                            <td>{{categoria.imagen}}</td>
+                            <!-- <td>{{categoria.linkAmigableAliado | slice:0:30}}</td> -->
+                            <!-- <td>{{categoria.linkMarcacion | slice:0:30}}</td> -->
                             <td>
                                 <span *ngIf="categoria.destacada">Sí</span>
                                 <span *ngIf="!categoria.destacada">No</span>
                             </td>
-                            <td>{{categoria.linkMarcacion | slice:0:35}}</td>
+                            <td>{{categoria.linkAmigableAliado}}</td>
+                            <td><span class="copiar-portapapeles"></span></td>
                             <td class="texto-rojo cursor-pointer" (click)="this.abrirModalActualizarCategoria(categoria)">Editar</td>
                             <td>
                                 <label class="switch">

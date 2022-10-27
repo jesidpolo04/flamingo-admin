@@ -25,10 +25,10 @@ export class ModalActualizarCategoriasAliadoComponent implements OnInit {
   constructor(private servicioModal:NgbModal, private servicioCategorias:AliadosService) {
     this.seHaActualizadoUnaCategoriaAliado = new EventEmitter<void>() 
     this.formulario = new FormGroup({
-      imagen: new FormControl('', [Validators.required]),
-      recursoImagen: new FormControl('', [Validators.required]),
+      imagen: new FormControl(''),
+      recursoImagen: new FormControl(''),
       enlaceAmigable: new FormControl('', [Validators.required]),
-      destacada: new FormControl('', [Validators.required]),
+      destacada: new FormControl(''),
     })
   }
 
@@ -64,6 +64,7 @@ export class ModalActualizarCategoriasAliadoComponent implements OnInit {
       this.formulario = marcarFormularioComoSucio(this.formulario)
       return;
     }
+    console.log(this.formulario.controls['destacada'].value)
     this.servicioCategorias.actualizarCategoriaAliado(
       this.aliado!.id,
       this.categoria!.id, new PeticionActualizarCategoriaAliado(

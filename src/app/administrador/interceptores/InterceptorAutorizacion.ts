@@ -8,7 +8,6 @@ export class InterceptorAutorizacion implements HttpInterceptor {
     constructor(private enrutador:Router){}
     
     intercept(peticion: HttpRequest<any>, siguiente: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('Interceptando petición')
         const token = localStorage.getItem('jwt');
         const peticionClonada = peticion.clone()
         if (!token) {
