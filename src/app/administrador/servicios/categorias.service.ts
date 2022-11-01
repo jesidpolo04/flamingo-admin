@@ -37,7 +37,7 @@ export class CategoriasService extends Autenticable{
 
   public obtenerCategorias(pagina?:number, limite?:number):Observable<{categorias: Categoria[], paginacion:Paginacion}>{
     let endpoint = ''
-    if(!pagina && !limite) endpoint = `/api/v1/categorias/listar`;
+    if(!pagina && !limite) endpoint = `/api/v1/categorias/listar/1/100`;
     else endpoint = endpoint = `/api/v1/categorias/listar/${pagina}/${limite}`;
     return this.clienteHttp
             .get<{categorias: Categoria[], paginacion:Paginacion}>(
