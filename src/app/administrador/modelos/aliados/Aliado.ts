@@ -8,6 +8,7 @@ export interface Aliado{
     tiempo: number,
     llave: string,
     comision: string,
+    nit: number,
     creacion: string
     actualizacion: string
     estado: boolean

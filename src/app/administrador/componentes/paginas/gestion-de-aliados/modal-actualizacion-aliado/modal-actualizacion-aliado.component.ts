@@ -57,7 +57,7 @@ export class ModalActualizacionAliadoComponent implements OnInit {
     this.formulario.reset()
     this.formulario.controls['orden'].setValue(1)
     this.formulario.controls['nombre'].setValue(aliado.nombre)
-    this.formulario.controls['nit'].setValue('')
+    this.formulario.controls['nit'].setValue(aliado.nit)
     this.formulario.controls['comision'].setValue(aliado.comision)
     this.formulario.controls['enlaceAmigable'].setValue(aliado.linkAmigable)
     this.formulario.controls['tiempo'].setValue(aliado.tiempo)
