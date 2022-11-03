@@ -1,1 +1,230 @@
-<p>reporte-ventas works!</p>
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Filtros de búsqueda</span>
+            </div>
+            <div class="card-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Fecha inicial</label>
+                                <input class="form-control" type="date">
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div id="fecha-reporte-ventas" class="col d-flex flex-column align-items-center p-4">
+                        <span class="fs-14px fw-semibold texto-naranja">Reporte de ventas:</span>
+                        <span class="fs-14px fw-semibold">24 de Octubre de 2022</span>
+                    </div>
+                    <div class="col d-flex justify-content-center p-4 flex-gap-20">
+                        <div class="d-flex align-items-center"><img src="assets/img/ventas.svg" alt=""></div>
+                        <div class="d-flex align-items-center fs-12px text-center fw-semibold"><span>Valor de las <br> ventas totales.</span></div>
+                        <div class="d-flex align-items-center"><span class="fs-25px fw-extrabold texto-naranja">$95.000.000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fs-14px fw-semibold texto-naranja">Ventas totales por aliado</span>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-flex flex-gap-10 mb-2">
+                            <div class="d-flex flex-gap-10">
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-12px">Buscar</span>
+                                </div>
+                                <div>
+                                    <input class="form-control sm" type="text">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="texto-gris fs-12px fw-bolder">Total: </span>
+                                <span class="texto-naranja fs-12px fw-bold">100</span>
+                            </div>
+                            <div class="d-flex justify-self-end flex-gap-5 ms-auto">
+                                <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
+                                <span class="texto-gris fs-12px fw-bold align-items-center">
+                                    <select #porPagina class="form-select sm" name="" id="">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </span>
+                                <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
+                            </div>
+                        </div>
+                        <div class="contenedor-tabla d-flex table-responsive ">
+                            <table class="table border fs-12px">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Aliado</th>
+                                    <th scope="col">Valor de ventas totales</th>
+                                    <th scope="col">Tráfico de clientes</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="col">Haceb</td>
+                                        <td scope="col">26.587.000</td>
+                                        <td scope="col">1000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex">
+                            <div class="ms-auto">
+                                <ngb-pagination
+                                [collectionSize]="100" [pageSize]="10">
+                                </ngb-pagination>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="contenedor-grafico">
+                                <canvas #baseChart></canvas>
+                            </div>
+                        </div>
+                        <div class="reportes-aliado">
+                            <div class="reporte-aliado d-flex flex-column" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                                <div class="rounded-circle overflow-hidden logo mb-2">
+                                    <img class="img-fluid" src="assets/img/nike.jpg" alt="">
+                                </div>
+                                <span class="fs-12px">$26.287.000</span>
+                                <span class="fs-12px">Tráfico: 1000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fs-14px fw-semibold texto-naranja">Registro de ventas</span>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-gap-10 mb-2">
+                    <div class="d-flex flex-gap-10">
+                        <div class="d-flex align-items-center">
+                            <span class="fs-12px">Buscar</span>
+                        </div>
+                        <div>
+                            <input class="form-control sm" type="text">
+                        </div>
+                    </div>
+                    <div>
+                        <span class="texto-gris fs-12px fw-bolder">Total: </span>
+                        <span class="texto-naranja fs-12px fw-bold">100</span>
+                    </div>
+                    <div class="d-flex justify-self-end flex-gap-5 ms-auto">
+                        <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
+                        <span class="texto-gris fs-12px fw-bold align-items-center">
+                            <select #porPagina class="form-select sm" name="" id="">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </span>
+                        <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
+                    </div>
+                </div>
+                <div class="contenedor-tabla d-flex table-responsive ">
+                    <table class="table border fs-12px">
+                        <thead>
+                        <tr>
+                          <th scope="col">Aliado</th>
+                          <th scope="col"># Order</th>
+                          <th scope="col">Fecha creación order</th>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Categoría</th>
+                          <th scope="col">Valor flete</th>
+                          <th scope="col">Valor</th>
+                          <th scope="col">Asesor</th>
+                          <th scope="col">Correo electrónico</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">Aliado</td>
+                                <td scope="col"># Order</td>
+                                <td scope="col">Fecha creación order</td>
+                                <td scope="col">Producto</td>
+                                <td scope="col">Categoría</td>
+                                <td scope="col">Valor flete</td>
+                                <td scope="col">Valor</td>
+                                <td scope="col">Asesor</td>
+                                <td scope="col">Correo electrónico</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        <button class="boton-flamingo rojo relleno">
+                            Exportar informe completo
+                        </button>
+                    </div>
+                    <div class="ms-auto">
+                        <ngb-pagination
+                        [collectionSize]="100" [pageSize]="10">
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

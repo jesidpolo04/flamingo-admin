@@ -1,0 +1,31 @@
+#fecha-reporte-ventas{
+    border-right: 1px solid #CFCBCB;
+}
+.reportes-aliado{
+    max-width: 100%;
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+.reporte-aliado {
+    padding: 10px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reporte-aliado .logo{
+    width: 62px;
+    height: 62px;
+    box-shadow: 0px 0px 10px #00000029;
+}
+
+.contenedor-grafico{
+    width: 80%;
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
