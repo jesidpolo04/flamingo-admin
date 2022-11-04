@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlBackend: 'http://172.16.83.24:8090'
+  urlBackend: 'https://ares.flamingo.com.co:8100'
 };
