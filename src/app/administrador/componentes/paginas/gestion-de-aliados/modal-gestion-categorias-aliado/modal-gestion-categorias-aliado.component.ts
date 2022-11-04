@@ -128,7 +128,13 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     this.modalActualizarCategoria.abrir(this.aliado!, categoria)
   }
 
+  public copiarAlPortapapeles(texto:string){
+    navigator.clipboard.writeText(texto)
+    this.popup.abrirPopupExitoso('Copiado al portapapeles')
+  }
+
   public debugDestacada(){
     console.log(this.formulario.controls['destacada'].value) 
   }
+
 }

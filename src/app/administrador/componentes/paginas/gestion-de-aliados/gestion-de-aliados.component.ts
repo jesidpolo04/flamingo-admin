@@ -74,4 +74,9 @@ export class GestionDeAliadosComponent implements OnInit {
   public abrirModalGestionCategorias(aliado:Aliado){
     this.modalGestionCategorias.abrir(aliado)
   }
+
+  public copiarAlPortapapeles(texto:string){
+    navigator.clipboard.writeText(texto)
+    this.popup.abrirPopupExitoso('Copiado al portapapeles')
+  }
 }

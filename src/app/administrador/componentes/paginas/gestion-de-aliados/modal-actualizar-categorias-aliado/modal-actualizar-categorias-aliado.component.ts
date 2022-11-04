@@ -92,4 +92,9 @@ export class ModalActualizarCategoriasAliadoComponent implements OnInit {
       });
     }
   }
+
+  public copiarAlPortapapeles(texto:string){
+    navigator.clipboard.writeText(texto)
+    this.popup.abrirPopupExitoso('Copiado al portapapeles')
+  }
 }

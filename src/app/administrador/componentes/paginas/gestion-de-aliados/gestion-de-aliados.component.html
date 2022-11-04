@@ -41,6 +41,7 @@
                               <th scope="col">Orden</th>
                               <th scope="col">Categorías Asociadas</th>
                               <th scope="col">Activo</th>
+                              <th scope="col" colspan="2">Enlace de marcación</th>
                               <th scope="col">Fecha de creación</th>
                               <th scope="col" colspan="2">Acciones</th>
                             </tr>
@@ -56,6 +57,8 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </td>
+                                <td>{{aliado.linkMarcacion | slice:0:50}}</td>
+                                <td><span class="copiar-portapapeles" (click)="this.copiarAlPortapapeles(aliado.linkMarcacion)"></span></td>
                                 <td>{{aliado.creacion}}</td>
                                 <td><span class="texto-rojo fw-bolder" (click)="this.abrirModalActualizacionAliado(aliado)">Editar</span></td>
                                 <td><span class="texto-rojo fw-bolder" (click)="this.abrirModalGestionCategorias(aliado)">Gestionar Categorías</span></td>

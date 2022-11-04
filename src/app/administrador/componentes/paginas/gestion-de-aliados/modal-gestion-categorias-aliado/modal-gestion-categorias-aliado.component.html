@@ -14,6 +14,7 @@
                 <div class="d-flex align-items-center flex-gap-10">
                     <span class="fs-12px fw-semibold">Enlace de marcación aliado:</span>
                     <span class="fs-12px">{{aliado.linkMarcacion}}</span>
+                    <span class="copiar-portapapeles" (click)="this.copiarAlPortapapeles(aliado.linkMarcacion)"></span>
                 </div>
             </div>
             <span class="texto-naranja fs-12px fw-bold">Asignar categoría</span>
@@ -93,9 +94,9 @@
                       <th scope="col">Nombre</th>
                       <!-- <th scope="col">Imagen</th> -->
                       <!-- <th scope="col">Enlace amigable Aliado</th> -->
-                      <!-- <th scope="col" colspan="2">Enlace de marcación</th> -->
                       <th scope="col">¿Destacada?</th>
-                      <th scope="col" colspan="2">Enlace amigable categoría</th>
+                      <th scope="col">Enlace amigable categoría</th>
+                      <th scope="col">Enlace de marcación</th>
                       <th scope="col" colspan="2">Acciones</th>
                     </tr>
                     </thead>
@@ -104,13 +105,15 @@
                             <td>{{categoria.nombre}}</td>
                             <!-- <td>{{categoria.imagen}}</td> -->
                             <!-- <td>{{categoria.linkAmigableAliado | slice:0:30}}</td> -->
-                            <!-- <td>{{categoria.linkMarcacion | slice:0:30}}</td> -->
                             <td>
                                 <span *ngIf="categoria.destacada">Sí</span>
                                 <span *ngIf="!categoria.destacada">No</span>
                             </td>
                             <td>{{categoria.linkAmigableAliado}}</td>
-                            <td><span class="copiar-portapapeles"></span></td>
+                            <td class="d-flex">
+                                <span class="me-1">{{categoria.linkMarcacion | slice:0:50}}... </span>  
+                                <span class="copiar-portapapeles" (click)="copiarAlPortapapeles(categoria.linkMarcacion)"></span> 
+                            </td>
                             <td class="texto-rojo cursor-pointer" (click)="this.abrirModalActualizarCategoria(categoria)">Editar</td>
                             <td>
                                 <label class="switch">
