@@ -13,23 +13,18 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
-  public hayVpn = false
+  public hayVpn = true
   public usuario:string = ''
   public contrasena:string = ''
 
   constructor(private servicioAutenticacion:AutenticacionService, private http:HttpClient, private enrutador:Router) { }
 
   ngOnInit(): void {
-    this.http.get(`http://172.16.8.34:8100`).subscribe(respuesta => {
-      this.hayVpn = true
-    },(error:HttpErrorResponse)=>{
-      if(error.status != 200){
-        console.log(error.status)
-        location.href = "https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/"
-      }else{
-        this.hayVpn = true
-      }
-    })
+    const dominioPublico = 'aliadosflamingo.flamingo.com.co:99'
+    const host = location.host;
+    if(host === dominioPublico){
+      location.href = 'https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/'
+    }
   }
 
   public iniciarSesion(){
