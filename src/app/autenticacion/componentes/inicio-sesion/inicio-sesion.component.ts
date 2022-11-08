@@ -1,7 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
 import Swal from 'sweetalert2';
 import { IniciarSesionRespuesta } from '../../modelos/IniciarSesionRespuesta';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
@@ -12,13 +13,22 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
-
+  public hayVpn = false
   public usuario:string = ''
   public contrasena:string = ''
 
-  constructor(private servicioAutenticacion:AutenticacionService, private enrutador:Router) { }
+  constructor(private servicioAutenticacion:AutenticacionService, private http:HttpClient, private enrutador:Router) { }
 
   ngOnInit(): void {
+    this.http.get(`http://172.16.8.34:8100/api/v1/aliados/listar/1/10`).subscribe(respuesta => {
+      this.hayVpn = true
+    },(error:HttpErrorResponse)=>{
+      if(error.status !== 401){
+        location.href = "https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/"
+      }else{
+        this.hayVpn = true
+      }
+    })
   }
 
   public iniciarSesion(){
