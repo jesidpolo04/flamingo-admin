@@ -20,10 +20,11 @@ export class InicioSesionComponent implements OnInit {
   constructor(private servicioAutenticacion:AutenticacionService, private http:HttpClient, private enrutador:Router) { }
 
   ngOnInit(): void {
-    this.http.get(`http://172.16.8.34:8100/api/v1/aliados/listar/1/10`).subscribe(respuesta => {
+    this.http.get(`http://172.16.8.34:8100`).subscribe(respuesta => {
       this.hayVpn = true
     },(error:HttpErrorResponse)=>{
-      if(error.status !== 401){
+      if(error.status != 200){
+        console.log(error.status)
         location.href = "https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/"
       }else{
         this.hayVpn = true
