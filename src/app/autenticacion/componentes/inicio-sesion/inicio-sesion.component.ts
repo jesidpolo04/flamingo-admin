@@ -23,8 +23,10 @@ export class InicioSesionComponent implements OnInit {
     const dominioPublico = 'aliadosflamingo.flamingo.com.co:99'
     const host = location.host;
     if(host === dominioPublico){
-      location.href = 'https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/'
-    }
+      console.log(host, dominioPublico)
+      console.log("redirigiendo")
+/*       location.href = 'https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/'
+ */    }
   }
 
   public iniciarSesion(){
