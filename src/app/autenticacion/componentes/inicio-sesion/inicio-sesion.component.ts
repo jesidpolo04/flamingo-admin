@@ -13,20 +13,17 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
   styleUrls: ['./inicio-sesion.component.css']
 })
 export class InicioSesionComponent implements OnInit {
-  public hayVpn = true
   public usuario:string = ''
   public contrasena:string = ''
 
-  constructor(private servicioAutenticacion:AutenticacionService, private http:HttpClient, private enrutador:Router) { }
+  constructor(private servicioAutenticacion:AutenticacionService, private enrutador:Router) { }
 
   ngOnInit(): void {
     const dominioPublico = 'aliadosflamingo.flamingo.com.co:99'
     const host = location.host;
     if(host === dominioPublico){
-      console.log(host, dominioPublico)
-      console.log("redirigiendo")
-/*       location.href = 'https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/'
- */    }
+      location.href = 'https://aliadosflamingo.flamingo.com.co:99/Marketing-Aliados-Frontend/dist/landing/browser/'
+    }
   }
 
   public iniciarSesion(){
