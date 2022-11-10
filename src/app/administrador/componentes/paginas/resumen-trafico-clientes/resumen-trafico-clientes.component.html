@@ -1,30 +1,23 @@
-<h1 class="fs-18px fw-bold text-center mb-4">Bienvenido al sistema de administración aliados flamingo</h1>
+<h1 class="fs-18px fw-semibold text-center mb-4">Bienvenido al sistema de administración aliados flamingo</h1>
 <div class="row">
     <div class="col-8">
         <div class="card">
-            <div class="card-body texto-negro">
-                <h2 class="texto-naranja fs-20px fw-semibold text-center">Tráfico Clientes</h2>
-                <div class="d-flex flex-gap-10 justify-content-between mb-3">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-around mb-3" *ngIf="this.estadisticas">
                     <div class="resumen">
-                        <h3 class="fs-14px fw-bold text-center">
-                            Total clientes redirigidos con ayuda de un asesor
-                        </h3>
-                        <img src="assets/img/redirecciones-asesor.svg" alt="redirecciones-asesor">
-                        <span class="estadistica fs-25px fw-extrabold">625</span>
+                        <span class="fs-14px fw-semibold text-center">Total clientes redirigidos con ayuda de un asesor</span>
+                        <img src="assets/img/redirecciones-asesor.svg" alt="">
+                        <span class="fw-extrabold fs-25px texto-gris">{{this.estadisticas.redireccionesConAsesor}}</span>
                     </div>
                     <div class="resumen">
-                        <h3 class="fs-14px fw-bold text-center">
-                            Total clientes redirigidos a aliados
-                        </h3>
-                        <img src="assets/img/redirecciones.svg" alt="redirecciones-asesor">
-                        <span class="estadistica fs-25px fw-extrabold">625</span>
+                        <span class="fs-14px fw-semibold text-center">Total clientes redirigidos a aliados</span>
+                        <img src="assets/img/redirecciones.svg" alt="">
+                        <span class="fw-extrabold fs-25px texto-gris">{{this.estadisticas.totalRedirecciones}}</span>
                     </div>
                     <div class="resumen">
-                        <h3 class="fs-14px fw-bold text-center">
-                            Total clientes redirigidos que navegan autonomamente
-                        </h3>
-                        <img src="assets/img/redirecciones-autonomas.svg" alt="redirecciones-asesor">
-                        <span class="estadistica fs-25px fw-extrabold">625</span>
+                        <span class="fs-14px fw-semibold text-center">Total clientes redirigidos que navegan autónomamente</span>
+                        <img src="assets/img/redirecciones-autonomas.svg" alt="">
+                        <span class="fw-extrabold fs-25px texto-gris">{{this.estadisticas.redireccionesAutonomas}}</span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -34,16 +27,13 @@
         </div>
     </div>
     <div class="col-4">
-        <div class="card texto-negro">
-            <div class="card-body">
-                <h3 class="texto-naranja fs-20px fw-semibold text-center">Ventas</h3>
-                <div class="d-flex justify-content-center mb-3">
+        <div class="card">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex mb-3 justify-content-center" *ngIf="this.totalVentas">
                     <div class="resumen">
-                        <h3 class="fs-14px fw-bold text-center">
-                            Ventas totales
-                        </h3>
-                        <img src="assets/img/ventas.svg" alt="redirecciones-asesor">
-                        <span class="estadistica fs-25px fw-extrabold">625</span>
+                        <span class="fs-14px fw-semibold text-center">Valor de las ventas totales</span>
+                        <img src="assets/img/ventas.svg" alt="">
+                        <span class="fw-extrabold fs-25px texto-gris">{{this.totalVentas | currency: ''}}</span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

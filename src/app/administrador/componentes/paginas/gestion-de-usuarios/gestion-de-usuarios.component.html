@@ -1,0 +1,71 @@
+<div class="d-flex flex-column flex-gap-30">
+    <div class="d-flex justify-content-end">
+        <button
+            (click)="this.abrirModalCreacionUsuario()" 
+            type="button" 
+            class="boton-flamingo rojo relleno">
+            <img src="assets/img/+.svg" class="me-1"> Crear Administrador
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card w-100">
+                <div class="card-header texto-naranja fs-14px fw-bold">
+                    Lista de administradores
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-gap-10 mb-2">
+                        <div>
+                            <span class="texto-gris fs-12px fw-bolder">Total: </span>
+                            <span class="texto-naranja fs-12px fw-bold">{{this.totalRegistros}}</span>
+                        </div>
+                        <div class="d-flex justify-self-end flex-gap-5 ms-auto">
+                            <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
+                            <span class="texto-gris fs-12px fw-bold align-items-center">
+                                <select #selectPorPagina class="form-select sm" name="" id="" (change)="this.cambiarPorPagina(selectPorPagina.value)">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </span>
+                            <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
+                        </div>
+                    </div>
+                    <div class="contenedor-tabla d-flex table-responsive ">
+                        <table class="table border fs-12px">
+                            <thead>
+                            <tr>
+                              <th scope="col">Identificación</th>
+                              <th scope="col">Nombre completo</th>
+                              <th scope="col">Nombre usuario</th>
+                              <th scope="col" colspan="1">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of this.usuarios; let index = index">
+                                    <td>{{ usuario.identificacion }}</td>
+                                    <td>{{ usuario.nombre }}</td>
+                                    <td>{{ usuario.usuario }}</td>
+                                    <td class="texto-naranja fw-semibold" (click)="this.abrirModalActualizacionUsuario(usuario)">Editar</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ngb-pagination
+                        [collectionSize]="this.totalRegistros" [(page)]="this.pagina" [pageSize]="this.porPagina" (pageChange)="this.cambioDePagina($event)">
+                    </ngb-pagination>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-modal-creacion-usuario 
+    #modalCreacionUsuario
+    (seHaCreadoUnUsuario)="this.obtenerUsuarios(this.pagina, this.porPagina)"></app-modal-creacion-usuario>
+<app-modal-actualizacion-usuario
+    #modalActualizacionUsuario
+    (seHaActualizadoUnUsuario)="this.obtenerUsuarios(this.pagina, this.porPagina)"></app-modal-actualizacion-usuario>

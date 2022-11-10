@@ -8,6 +8,7 @@ import { AdministradorModule } from './administrador/administrador.module';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorAutorizacion } from './administrador/interceptores/InterceptorAutorizacion';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InterceptorAutorizacion } from './administrador/interceptores/Intercept
     NgbModule,
 
     AdministradorModule,
-    AutenticacionModule
+    AutenticacionModule,
+    NgChartsModule
   ],
   providers: [
     {

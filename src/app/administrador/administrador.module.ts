@@ -20,6 +20,10 @@ import { ModalActualizarCategoriaComponent } from './componentes/paginas/gestion
 import { ResumenTraficoClientesComponent } from './componentes/paginas/resumen-trafico-clientes/resumen-trafico-clientes.component';
 import { TraficoClientesComponent } from './componentes/paginas/trafico-clientes/trafico-clientes.component';
 import { ReporteVentasComponent } from './componentes/paginas/reporte-ventas/reporte-ventas.component';
+import { NgChartsModule } from 'ng2-charts';
+import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usuarios/gestion-de-usuarios.component';
+import { ModalCreacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-creacion-usuario/modal-creacion-usuario.component';
+import { ModalActualizacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-actualizacion-usuario/modal-actualizacion-usuario.component';
 
 
 
@@ -40,6 +44,9 @@ import { ReporteVentasComponent } from './componentes/paginas/reporte-ventas/rep
     ResumenTraficoClientesComponent,
     TraficoClientesComponent,
     ReporteVentasComponent,
+    GestionDeUsuariosComponent,
+    ModalCreacionUsuarioComponent,
+    ModalActualizacionUsuarioComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +54,7 @@ import { ReporteVentasComponent } from './componentes/paginas/reporte-ventas/rep
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
+    NgChartsModule,
     SweetAlert2Module.forRoot()
   ]
 })

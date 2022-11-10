@@ -22,7 +22,7 @@ export class AliadosService extends Autenticable {
     this.urlBackend = environment.urlBackend
   }
 
-  public obtenerAliados(pagina:number, limite:number):Observable<{aliados: Aliado[], paginacion:Paginacion}>{
+  public obtenerAliados(pagina:number = 1, limite:number = 5000):Observable<{aliados: Aliado[], paginacion:Paginacion}>{
     const endpoint = `/api/v1/aliados/listar/${pagina}/${limite}?esAdministrador=true`
     return this.clienteHttp
             .get<{aliados: Aliado[], paginacion:Paginacion}>(

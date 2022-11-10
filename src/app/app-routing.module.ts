@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GestionDeAliadosComponent } from './administrador/componentes/paginas/gestion-de-aliados/gestion-de-aliados.component';
 import { GestionDeCategoriasComponent } from './administrador/componentes/paginas/gestion-de-categorias/gestion-de-categorias.component';
+import { GestionDeUsuariosComponent } from './administrador/componentes/paginas/gestion-de-usuarios/gestion-de-usuarios.component';
 import { ReporteVentasComponent } from './administrador/componentes/paginas/reporte-ventas/reporte-ventas.component';
 import { ResumenTraficoClientesComponent } from './administrador/componentes/paginas/resumen-trafico-clientes/resumen-trafico-clientes.component';
 import { TraficoClientesComponent } from './administrador/componentes/paginas/trafico-clientes/trafico-clientes.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'ventas',
         component: ReporteVentasComponent
+      },
+      {
+        path: 'administradores',
+        component: GestionDeUsuariosComponent
       }
     ],
     canActivate: [AutenticacionGuard]

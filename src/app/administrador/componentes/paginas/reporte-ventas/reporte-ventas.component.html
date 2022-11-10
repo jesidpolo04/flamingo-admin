@@ -4,41 +4,49 @@
             <div class="card-header">
                 <span class="fw-semibold fs-14px texto-naranja">Filtros de búsqueda</span>
             </div>
-            <div class="card-body">
-                <form action="">
-                    <div class="row">
-                        <div class="col">
-                            <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
-                            </fieldset>
+            <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                    <form [formGroup]="formulario">
+                        <div class="row">
+                            <div class="col">
+                                <fieldset>
+                                    <label for="">Correo de usuario</label>
+                                    <input formControlName="correo" class="form-control" type="text">
+                                </fieldset>
+                            </div>
+                            <div class="col">
+                                <fieldset>
+                                    <label for="">Asesor</label>
+                                    <input formControlName="asesor" class="form-control" type="number">
+                                </fieldset>
+                            </div>
+                            <div class="col">
+                                <fieldset>
+                                    <label for="">Aliado</label>
+                                    <select formControlName="aliado" class="form-select" name="" id="">
+                                        <option value="" selected>Elige un aliado</option>
+                                        <option [value]="aliado.id" *ngFor="let aliado of aliados">{{aliado.nombre}}</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col">
+                                <fieldset>
+                                    <label for="">Fecha inicial</label>
+                                    <input formControlName="fechaInicial" class="form-control" type="date">
+                                </fieldset>
+                            </div>
+                            <div class="col">
+                                <fieldset>
+                                    <label for="">Fecha Final</label>
+                                    <input formControlName="fechaFinal" class="form-control" type="date">
+                                </fieldset>
+                            </div>
                         </div>
-                        <div class="col">
-                            <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
-                            </fieldset>
-                        </div>
-                        <div class="col">
-                            <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
-                            </fieldset>
-                        </div>
-                        <div class="col">
-                            <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
-                            </fieldset>
-                        </div>
-                        <div class="col">
-                            <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
-                            </fieldset>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="d-flex">
+                    <button (click)="this.aplicarFiltros()" class="ms-auto boton-flamingo rojo relleno">Buscar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -51,12 +59,12 @@
                 <div class="row">
                     <div id="fecha-reporte-ventas" class="col d-flex flex-column align-items-center p-4">
                         <span class="fs-14px fw-semibold texto-naranja">Reporte de ventas:</span>
-                        <span class="fs-14px fw-semibold">24 de Octubre de 2022</span>
+                        <span class="fs-14px fw-semibold">{{this.descripcionDeFecha}}</span>
                     </div>
                     <div class="col d-flex justify-content-center p-4 flex-gap-20">
                         <div class="d-flex align-items-center"><img src="assets/img/ventas.svg" alt=""></div>
                         <div class="d-flex align-items-center fs-12px text-center fw-semibold"><span>Valor de las <br> ventas totales.</span></div>
-                        <div class="d-flex align-items-center"><span class="fs-25px fw-extrabold texto-naranja">$95.000.000</span></div>
+                        <div class="d-flex align-items-center"><span class="fs-25px fw-extrabold texto-naranja">{{this.totalVentas | currency: ''}}</span></div>
                     </div>
                 </div>
             </div>
@@ -80,17 +88,20 @@
                                     <span class="fs-12px">Buscar</span>
                                 </div>
                                 <div>
-                                    <input class="form-control sm" type="text">
+                                    <input class="form-control sm" type="text" >
+                                </div>
+                                <div>
+                                    <button class="boton-flamingo rojo relleno">Buscar</button>
                                 </div>
                             </div>
                             <div>
                                 <span class="texto-gris fs-12px fw-bolder">Total: </span>
-                                <span class="texto-naranja fs-12px fw-bold">100</span>
+                                <span class="texto-naranja fs-12px fw-bold">{{this.totalRegistrosTotalesVentasAliados}}</span>
                             </div>
                             <div class="d-flex justify-self-end flex-gap-5 ms-auto">
                                 <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
                                 <span class="texto-gris fs-12px fw-bold align-items-center">
-                                    <select #porPagina class="form-select sm" name="" id="">
+                                    <select #selectPorPaginaTotales class="form-select sm" (change)="this.cambiarPorPaginaTotalesVentasAliados(selectPorPaginaTotales.value)">
                                         <option value="5">5</option>
                                         <option value="10">10</option>
                                         <option value="15">15</option>
@@ -106,14 +117,12 @@
                                 <tr>
                                     <th scope="col">Aliado</th>
                                     <th scope="col">Valor de ventas totales</th>
-                                    <th scope="col">Tráfico de clientes</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="col">Haceb</td>
-                                        <td scope="col">26.587.000</td>
-                                        <td scope="col">1000</td>
+                                    <tr *ngFor="let total of this.totalesVentasAliados">
+                                        <td scope="col">{{total.aliadoNombre}}</td>
+                                        <td scope="col">{{total.totalVentas | currency: ''}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,7 +130,7 @@
                         <div class="d-flex">
                             <div class="ms-auto">
                                 <ngb-pagination
-                                [collectionSize]="100" [pageSize]="10">
+                                [collectionSize]="this.totalRegistrosTotalesVentasAliados" [pageSize]="this.porPaginaTotalesVentasAliados">
                                 </ngb-pagination>
                             </div>
                         </div>
@@ -133,12 +142,11 @@
                             </div>
                         </div>
                         <div class="reportes-aliado">
-                            <div class="reporte-aliado d-flex flex-column" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                            <div class="reporte-aliado d-flex flex-column" *ngFor="let total of this.totalesVentasAliados">
                                 <div class="rounded-circle overflow-hidden logo mb-2">
-                                    <img class="img-fluid" src="assets/img/nike.jpg" alt="">
+                                    <img class="img-fluid" [src]="total.aliadoLogo" alt="">
                                 </div>
-                                <span class="fs-12px">$26.287.000</span>
-                                <span class="fs-12px">Tráfico: 1000</span>
+                                <span class="fs-12px">{{total.totalVentas | currency: ''}}</span>
                             </div>
                         </div>
                     </div>
@@ -162,19 +170,22 @@
                             <span class="fs-12px">Buscar</span>
                         </div>
                         <div>
-                            <input class="form-control sm" type="text">
+                            <input #inputTermino (keyup)="this.cambiarTermino(inputTermino.value)" class="form-control sm" type="text">
+                        </div>
+                        <div>
+                            <button (click)="this.aplicarFiltros()" class="boton-flamingo rojo relleno">Buscar</button>
                         </div>
                     </div>
                     <div>
                         <span class="texto-gris fs-12px fw-bolder">Total: </span>
-                        <span class="texto-naranja fs-12px fw-bold">100</span>
+                        <span class="texto-naranja fs-12px fw-bold">{{this.totalRegistros}}</span>
                     </div>
                     <div class="d-flex justify-self-end flex-gap-5 ms-auto">
                         <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
                         <span class="texto-gris fs-12px fw-bold align-items-center">
-                            <select #porPagina class="form-select sm" name="" id="">
+                            <select #selectPorPagina class="form-select sm" (change)="this.cambiarPorPaginaVentas(selectPorPagina.value)">
                                 <option value="5">5</option>
-                                <option value="10">10</option>
+                                <option value="10" selected>10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
                             </select>
@@ -198,16 +209,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="col">Aliado</td>
-                                <td scope="col"># Order</td>
-                                <td scope="col">Fecha creación order</td>
-                                <td scope="col">Producto</td>
-                                <td scope="col">Categoría</td>
-                                <td scope="col">Valor flete</td>
-                                <td scope="col">Valor</td>
-                                <td scope="col">Asesor</td>
-                                <td scope="col">Correo electrónico</td>
+                            <tr *ngFor="let venta of this.ventas">
+                                <td scope="col">{{venta.aliadoNombre}}</td>
+                                <td scope="col">{{venta.ordenCompra}}</td>
+                                <td scope="col">{{venta.fechaOrden}}</td>
+                                <td scope="col">{{venta.productos}}</td>
+                                <td scope="col">{{venta.categorias}}</td>
+                                <td scope="col">{{venta.flete}}</td>
+                                <td scope="col">{{venta.valorTotal}}</td>
+                                <td scope="col">{{venta.asesorTrafico}}</td>
+                                <td scope="col">{{venta.correos}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -220,7 +231,7 @@
                     </div>
                     <div class="ms-auto">
                         <ngb-pagination
-                        [collectionSize]="100" [pageSize]="10">
+                        [collectionSize]="this.totalRegistros" [pageSize]="this.porPagina">
                         </ngb-pagination>
                     </div>
                 </div>

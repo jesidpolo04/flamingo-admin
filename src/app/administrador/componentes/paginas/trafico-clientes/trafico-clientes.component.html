@@ -5,40 +5,47 @@
                 <span class="fw-semibold fs-14px texto-naranja">Filtros de búsqueda</span>
             </div>
             <div class="card-body">
-                <form action="">
+                <form [formGroup]="formulario" class="mb-4">
                     <div class="row">
                         <div class="col">
                             <fieldset>
                                 <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
+                                <input formControlName="fechaInicial" class="form-control" type="date">
                             </fieldset>
                         </div>
                         <div class="col">
                             <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
+                                <label for="">Fecha final</label>
+                                <input formControlName="fechaFinal" class="form-control" type="date">
                             </fieldset>
                         </div>
                         <div class="col">
                             <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
+                                <label for="">Asesor</label>
+                                <input formControlName="asesor" class="form-control" type="number">
                             </fieldset>
                         </div>
                         <div class="col">
                             <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
+                                <label for="">Aliado</label>
+                                <select formControlName="aliado" class="form-select" name="" id="">
+                                    <option [value]="aliado.id" *ngFor="let aliado of this.aliados">{{aliado.nombre}}</option>
+                                </select>
                             </fieldset>
                         </div>
                         <div class="col">
                             <fieldset>
-                                <label for="">Fecha inicial</label>
-                                <input class="form-control" type="date">
+                                <label for="" >Categoría</label>
+                                <select formControlName="categoria" class="form-select" name="" id="">
+                                    <option [value]="categoria.id" *ngFor="let categoria of this.categorias">{{categoria.nombre}}</option>
+                                </select>
                             </fieldset>
                         </div>
                     </div>
                 </form>
+                <div class="d-flex">
+                    <button class="boton-flamingo rojo relleno ms-auto" (click)="this.aplicarFiltros()">Buscar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -49,37 +56,37 @@
         <div class="card">
             <div class="card-body">
                 <span class="fs-14px texto-naranja fw-semibold">Tráfico de clientes: </span>
-                <span class="fs-14px fw-semibold">24 de octubre de 2022</span>
+                <span class="fs-14px fw-semibold">{{this.descripcionDeFecha}}</span>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row texto-negro mb-3">
+<div class="row d-flex texto-negro mb-3" *ngIf="this.estadisticas">
     <div class="col">
-        <div class="card">
+        <div class="card h-100" >
             <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
                 <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
                 <img class="icono-redireccion" src="assets/img/redirecciones.svg">
-                <span class="fs-25px fw-extrabold text-center">1500</span>
+                <span class="fs-25px fw-extrabold text-center">{{this.estadisticas.totalRedirecciones}}</span>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
-                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
-                <img class="icono-redireccion" src="assets/img/redirecciones.svg">
-                <span class="fs-25px fw-extrabold text-center">1500</span>
+                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos con ayuda de un asesor</h3>
+                <img class="icono-redireccion" src="assets/img/redirecciones-asesor.svg">
+                <span class="fs-25px fw-extrabold text-center">{{this.estadisticas.redireccionesConAsesor}}</span>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body d-flex flex-column justify-content-center flex-gap-20 carta-estadistica-redireccion">
-                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos a aliados</h3>
-                <img class="icono-redireccion" src="assets/img/redirecciones.svg">
-                <span class="fs-25px fw-extrabold text-center">1500</span>
+                <h3 class="fs-14px fw-extrabold mb-3 text-center">Total clientes redirigidos que navegan autónomamente</h3>
+                <img class="icono-redireccion" src="assets/img/redirecciones-autonomas.svg">
+                <span class="fs-25px fw-extrabold text-center">{{this.estadisticas.redireccionesAutonomas}}</span>
             </div>
         </div>
     </div>
@@ -95,22 +102,25 @@
                 <div class="d-flex flex-gap-10 mb-2">
                     <div class="d-flex flex-gap-10">
                         <div class="d-flex align-items-center">
-                            <span class="fs-12px">Buscar</span>
+                            <span class="fs-12px" >Buscar</span>
                         </div>
                         <div>
-                            <input class="form-control sm" type="text">
+                            <input #inputTermino (keyup)="this.cambiarTermino(inputTermino.value)" class="form-control sm" type="text">
+                        </div>
+                        <div>
+                            <button class="boton-flamingo rojo relleno" (click)="aplicarFiltros()">Buscar</button>
                         </div>
                     </div>
                     <div>
                         <span class="texto-gris fs-12px fw-bolder">Total: </span>
-                        <span class="texto-naranja fs-12px fw-bold">100</span>
+                        <span class="texto-naranja fs-12px fw-bold">{{totalRegistros}}</span>
                     </div>
                     <div class="d-flex justify-self-end flex-gap-5 ms-auto">
                         <span class="texto-gris fs-12px fw-bold d-flex align-items-center">ver</span>
                         <span class="texto-gris fs-12px fw-bold align-items-center">
-                            <select #porPagina class="form-select sm" name="" id="">
+                            <select #selectorPorPagina class="form-select sm" name="" id="">
                                 <option value="5">5</option>
-                                <option value="10">10</option>
+                                <option value="10" selected>10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
                             </select>
@@ -132,14 +142,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="col">Aliado</td>
-                                <td scope="col">Cateogría</td>
-                                <td scope="col">Asesor</td>
-                                <td scope="col">Usuario</td>
-                                <td scope="col">Celular</td>
-                                <td scope="col">Correo</td>
-                                <td scope="col">Fecha</td>
+                            <tr *ngFor="let marcacion of this.marcaciones">
+                                <td scope="col">{{marcacion.aliadoNombre}}</td>
+                                <td scope="col">{{marcacion.categoriaNombre}}</td>
+                                <td scope="col">{{marcacion.asesorId}}</td>
+                                <td scope="col">{{marcacion.nombreCliente}}</td>
+                                <td scope="col">{{marcacion.telefonoCliente}}</td>
+                                <td scope="col">{{marcacion.correoCliente}}</td>
+                                <td scope="col">{{marcacion.fecha}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -152,7 +162,7 @@
                     </div>
                     <div class="ms-auto">
                         <ngb-pagination
-                        [collectionSize]="100" [pageSize]="10">
+                        [collectionSize]="this.totalRegistros" [pageSize]="this.porPagina" (pageChange)="this.cambiarPagina($event)">
                         </ngb-pagination>
                     </div>
                 </div>
