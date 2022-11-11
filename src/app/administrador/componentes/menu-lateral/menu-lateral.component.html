@@ -11,40 +11,10 @@
                 <img class="icono-20px" src="assets/img/icono-panel.svg" alt="">
             </span>
             <span class="fs-14px fw-semibold">
-                Panel de control
+                Panel de Control
             </span>
         </div>
     </div>
-    <hr>
-    <section class="seccion-menu">
-        <a  class="titulo-seccion cursor-pointer fs-14px fw-semibold"
-            (click)="collapse.toggle()" 
-            [attr.aria-expanded]="!isCollapsed"
-            aria-controls="collapseExample">
-                <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: !isCollapsed}">
-                Tableros
-        </a>
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <ul>
-                <li class="fs-12px" [routerLink]="['/administrar', 'trafico']">Tráfico de clientes</li>
-                <li class="fs-12px" [routerLink]="['/administrar', 'ventas']">Reporte de ventas</li>
-            </ul>
-        </div>
-    </section>
-    <section class="seccion-menu">
-        <a  class="titulo-seccion cursor-pointer fs-14px fw-semibold"
-            (click)="collapse.toggle()" 
-            [attr.aria-expanded]="!isCollapsed"
-            aria-controls="collapseExample">
-                <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: !isCollapsed}">
-                Gestion
-        </a>
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-            <ul>
-                <li class="fs-12px" [routerLink]="['/administrar', 'aliados']">Aliados</li>
-                <li class="fs-12px" [routerLink]="['/administrar', 'categorias']">Categorias</li>
-                <li class="fs-12px" [routerLink]="['/administrar', 'administradores']">Administradores</li>
-            </ul>
-        </div>
-    </section>
+
+    <app-seccion-de-menu *ngFor="let seccion of this.secciones" [titulo]="this.seccion.titulo" [modulos]="this.seccion.modulos"></app-seccion-de-menu>
 </aside>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Seccion } from '../../modelos/menu-lateral/Seccion';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -9,6 +10,38 @@ export class MenuLateralComponent implements OnInit {
 
   isCollapsed = false;
   desplegado = true
+  public secciones:Seccion[] = [
+    {
+      titulo: 'Tableros',
+      modulos: [
+        {
+          nombre: 'Reporte de ventas',
+          ruta: '/administrar/ventas'
+        },
+        {
+          nombre: 'Tráfico de clientes',
+          ruta: '/administrar/trafico'
+        }
+      ]
+    },
+    {
+      titulo: 'Gestión',
+      modulos: [
+        {
+          nombre: 'Aliados',
+          ruta: '/administrar/aliados'
+        },
+        {
+          nombre: 'Categorías',
+          ruta: '/administrar/categorias'
+        },
+        {
+          nombre: 'Administradores',
+          ruta: '/administrar/administradores'
+        }
+      ]
+    }
+  ]
 
   constructor() { }
 

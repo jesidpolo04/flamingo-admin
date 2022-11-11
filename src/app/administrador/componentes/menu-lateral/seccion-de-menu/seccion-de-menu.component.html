@@ -1,0 +1,15 @@
+<hr>
+<section class="seccion-menu">
+    <a  class="titulo-seccion cursor-pointer fs-14px fw-semibold"
+        (click)="collapse.toggle()" 
+        [attr.aria-expanded]="!colapsado"
+        aria-controls="collapseExample">
+            <img src="assets/img/flecha-derecha.svg" class="me-2" [ngClass]="{desplegado: colapsado}">
+            {{this.titulo}}
+    </a>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="colapsado">
+        <ul>
+            <li *ngFor="let modulo of modulos" class="fs-12px" [routerLink]="this.modulo.ruta">{{this.modulo.nombre}}</li>
+        </ul>
+    </div>
+</section>

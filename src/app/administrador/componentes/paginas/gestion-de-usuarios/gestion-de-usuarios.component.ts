@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from 'src/app/administrador/modelos/usuarios/Usuario';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { UsuariosService } from 'src/app/administrador/servicios/usuarios.service';
 import { ModalActualizacionUsuarioComponent } from './modal-actualizacion-usuario/modal-actualizacion-usuario.component';
 import { ModalCreacionUsuarioComponent } from './modal-creacion-usuario/modal-creacion-usuario.component';
@@ -17,7 +18,9 @@ export class GestionDeUsuariosComponent implements OnInit {
   public pagina = 1;
   public porPagina = 10;
 
-  constructor(private servicioUsuarios:UsuariosService) { }
+  constructor(private servicioUsuarios:UsuariosService, private servicioCabecera:CabeceraService) { 
+    this.servicioCabecera.actualizarTitulo('Gestión de administradores')
+  }
 
   ngOnInit(): void {
     this.obtenerUsuarios(1, this.porPagina)

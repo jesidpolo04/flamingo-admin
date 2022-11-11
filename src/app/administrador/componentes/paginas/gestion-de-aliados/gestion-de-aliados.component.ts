@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { Aliado } from '../../../modelos/aliados/Aliado';
 import { AliadosService } from '../../../servicios/aliados.service';
 import { PopupComponent } from '../../popup/popup.component';
@@ -22,7 +23,9 @@ export class GestionDeAliadosComponent implements OnInit {
   public total = 0;
   public aliados:Aliado[] = []
 
-  constructor(private servicioAliados:AliadosService) { }
+  constructor(private servicioAliados:AliadosService, private servicioCabecera:CabeceraService) { 
+    this.servicioCabecera.actualizarTitulo('Gestión de aliados')
+  }
 
   ngOnInit(): void {
     this.servicioAliados.obtenerAliados(this.pagina, this.limite).subscribe(respuesta =>{

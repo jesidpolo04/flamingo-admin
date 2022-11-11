@@ -24,6 +24,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usuarios/gestion-de-usuarios.component';
 import { ModalCreacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-creacion-usuario/modal-creacion-usuario.component';
 import { ModalActualizacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-actualizacion-usuario/modal-actualizacion-usuario.component';
+import { SeccionDeMenuComponent } from './componentes/menu-lateral/seccion-de-menu/seccion-de-menu.component';
 
 
 
@@ -47,6 +48,7 @@ import { ModalActualizacionUsuarioComponent } from './componentes/paginas/gestio
     GestionDeUsuariosComponent,
     ModalCreacionUsuarioComponent,
     ModalActualizacionUsuarioComponent,
+    SeccionDeMenuComponent,
   ],
   imports: [
     CommonModule,

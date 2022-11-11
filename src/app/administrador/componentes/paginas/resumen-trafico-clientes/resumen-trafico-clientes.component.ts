@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CriteriosBusquedaMarcaciones } from 'src/app/administrador/modelos/trafico/CriteriosBusquedaMarcaciones';
 import { Estadisticas } from 'src/app/administrador/modelos/trafico/Estadisticas';
 import { CriteriosBusquedaVentas } from 'src/app/administrador/modelos/ventas/CriteriosBusquedaVentas';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { TraficoService } from 'src/app/administrador/servicios/trafico.service';
 import { VentasService } from 'src/app/administrador/servicios/ventas.service';
 
@@ -14,7 +15,9 @@ export class ResumenTraficoClientesComponent implements OnInit {
   public estadisticas?:Estadisticas
   public totalVentas?:number
 
-  constructor(private servicioTrafico:TraficoService, private servicioVentas:VentasService) { }
+  constructor(private servicioTrafico:TraficoService, private servicioVentas:VentasService, private servicioCabecera:CabeceraService) { 
+    this.servicioCabecera.actualizarTitulo('')
+  }
 
   ngOnInit(): void {
     this.servicioTrafico.obtenerEstadisticasMarcaciones(new CriteriosBusquedaMarcaciones(

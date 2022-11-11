@@ -91,7 +91,7 @@ input[type=number] {
     outline: none;
     border: none;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
 }
 .boton-flamingo.rojo.delineado{
     background-color: transparent;

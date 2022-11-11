@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path:'',
-        redirectTo: 'aliados',
+        redirectTo: 'trafico',
         pathMatch: 'full' 
       },
       {

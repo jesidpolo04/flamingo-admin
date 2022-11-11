@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Categoria } from 'src/app/administrador/modelos/categorias/Categoria';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
 import { ModalActualizarCategoriaComponent } from './modal-actualizar-categoria/modal-actualizar-categoria.component';
 import { ModalCreacionCategoriaComponent } from './modal-creacion-categoria/modal-creacion-categoria.component';
@@ -18,7 +19,9 @@ export class GestionDeCategoriasComponent implements OnInit {
   public filtro:string = '';
   public categorias:Categoria[] = []
 
-  constructor(private servicioCategorias:CategoriasService) { }
+  constructor(private servicioCategorias:CategoriasService, private servicioCabecera:CabeceraService) {
+    this.servicioCabecera.actualizarTitulo('Gestión de categorías')
+  }
 
   ngOnInit(): void {
     this.obtenerListaDeCategorias()

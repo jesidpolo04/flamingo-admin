@@ -6,6 +6,7 @@ import { CriteriosBusquedaMarcaciones } from 'src/app/administrador/modelos/traf
 import { Estadisticas } from 'src/app/administrador/modelos/trafico/Estadisticas';
 import { Marcacion } from 'src/app/administrador/modelos/trafico/Marcacion';
 import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
 import { TraficoService } from 'src/app/administrador/servicios/trafico.service';
 import { MESES } from 'src/app/administrador/utilidades/Fechas';
@@ -30,7 +31,9 @@ export class TraficoClientesComponent implements OnInit {
   constructor(
     private servicioTrafico:TraficoService, 
     private servicioCategorias:CategoriasService, 
-    private servicioAliados:AliadosService) { 
+    private servicioAliados:AliadosService,
+    private servicioCabecera:CabeceraService) { 
+    this.servicioCabecera.actualizarTitulo('Consulta de tráfico de clientes')
     this.formulario = new FormGroup({
       fechaInicial: new FormControl(''),
       fechaFinal: new FormControl(''),

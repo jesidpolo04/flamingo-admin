@@ -1,0 +1,21 @@
+.seccion-menu{
+    position: relative;
+    width: 100%;
+}
+.seccion-menu .titulo-seccion{
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+.seccion-menu ul{
+    padding-left: 15px !important;
+}
+.seccion-menu ul li{
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.desplegado{
+    transform: rotate(90deg);
+}

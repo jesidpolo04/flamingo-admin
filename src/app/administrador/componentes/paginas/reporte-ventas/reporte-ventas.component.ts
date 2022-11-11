@@ -6,6 +6,7 @@ import { CriteriosBusquedaVentas } from 'src/app/administrador/modelos/ventas/Cr
 import { TotalVentas } from 'src/app/administrador/modelos/ventas/TotalVentas';
 import { Venta } from 'src/app/administrador/modelos/ventas/Venta';
 import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
+import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { VentasService } from 'src/app/administrador/servicios/ventas.service';
 import { MESES } from 'src/app/administrador/utilidades/Fechas';
 @Component({
@@ -33,7 +34,8 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
   public data:number[] = []
   public coloresGrafico: string[] = ['#4E73DF', '#36B9CC', '#1CC88A']
 
-  public constructor(private servicioAliados:AliadosService, private servicioVentas:VentasService) {
+  public constructor(private servicioAliados:AliadosService, private servicioVentas:VentasService, private servicioCabecera:CabeceraService) {
+    this.servicioCabecera.actualizarTitulo('Consulta de reporte de ventas')
     this.formulario = new FormGroup({
       fechaInicial: new FormControl(''),
       fechaFinal: new FormControl(''),
