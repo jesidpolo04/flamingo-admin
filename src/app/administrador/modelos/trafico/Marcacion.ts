@@ -4,7 +4,7 @@ export interface Marcacion {
     aliadoId: string
     categoriaNombre: string
     categoriaId: string
-    fecha: Date
+    fecha: string
     clienteId: string
     nombreCliente: string
     correoCliente: string

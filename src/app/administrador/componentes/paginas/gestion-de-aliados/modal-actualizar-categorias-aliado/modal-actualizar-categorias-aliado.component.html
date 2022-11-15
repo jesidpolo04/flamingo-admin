@@ -25,7 +25,7 @@
         <span class="texto-naranja fs-12px fw-bold">Asignar categoría</span>
         <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
             <div class="border rounded p-3">
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6">
                         <fieldset *ngIf="this.categoria">
                             <label for="">Nombre de la categoría</label>
@@ -54,12 +54,14 @@
                         </fieldset>
                     </div>
                     <div class="col-6">
-                        <fieldset class="d-flex flex-column">
+                        <fieldset>
                             <label for="">¿Categoría destacada?</label>
-                            <label class="switch">
-                                <input type="checkbox" [checked]="this.categoria?.destacada" formControlName="destacada">
-                                <span class="slider round"></span>
-                            </label>
+                            <div class="mt-2 ms-3">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="this.categoria?.destacada" formControlName="destacada">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </fieldset>
                     </div>
                 </div>

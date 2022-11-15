@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Categoria } from 'src/app/administrador/modelos/categorias/Categoria';
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
+import { formatearFecha } from 'src/app/administrador/utilidades/Fechas';
 import { ModalActualizarCategoriaComponent } from './modal-actualizar-categoria/modal-actualizar-categoria.component';
 import { ModalCreacionCategoriaComponent } from './modal-creacion-categoria/modal-creacion-categoria.component';
 
@@ -29,7 +30,10 @@ export class GestionDeCategoriasComponent implements OnInit {
 
   public obtenerListaDeCategorias(){
     this.servicioCategorias.obtenerCategorias(this.pagina, this.limite).subscribe(respuesta => {
-      this.categorias = respuesta.categorias
+      this.categorias = respuesta.categorias.map(categoria => {
+        categoria.creacion = formatearFecha(categoria.creacion)
+        return categoria
+      })
       this.total = respuesta.paginacion.totalRegistros
     })
   }

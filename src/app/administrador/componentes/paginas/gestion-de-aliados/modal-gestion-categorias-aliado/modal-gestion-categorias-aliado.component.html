@@ -20,11 +20,12 @@
             <span class="texto-naranja fs-12px fw-bold">Asignar categoría</span>
             <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
                 <div class="border rounded p-3">
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-6">
                             <fieldset>
                                 <label for="">Nombre de la categoría</label>
                                 <select class="form-select" name="" formControlName="categoria" aria-placeholder="Seleccionar">
+                                    <option value="" selected disabled>Seleccionar ...</option>
                                     <option *ngFor="let categoria of this.categorias" [value]="categoria.id">{{categoria.nombre}}</option>
                                 </select>
                                 <span class="validacion"
@@ -39,7 +40,9 @@
                         <div class="col-6">
                             <fieldset>
                                 <label for="">Imagen categoría</label>
-                                <input (change)="this.cambioDeImagen($event)" accept="image/*" type="file" class="form-control" formControlName="imagen">
+                                <label class="archivo">
+                                    <input (change)="this.cambioDeImagen($event)" accept="image/*" type="file" class="form-control" formControlName="imagen">
+                                </label>
                                 <span class="validacion"
                                     *ngIf="
                                     this.formulario.controls['imagen'].errors &&
@@ -67,10 +70,14 @@
                         <div class="col-6">
                             <fieldset class="d-flex flex-column">
                                 <label for="">¿Categoría destacada?</label>
-                                <label class="switch">
-                                    <input type="checkbox" formControlName="destacada" (change)="debugDestacada()">
-                                    <span class="slider round"></span>
-                                </label>
+                                <div>
+                                    <label class="switch mt-3 ms-3">
+                                        <input #destacada type="checkbox" formControlName="destacada" (change)="debugDestacada()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <span class="ms-1   fs-12px fw-semibold" *ngIf="destacada.checked">Sí</span>
+                                    <span class="ms-1   fs-12px fw-semibold" *ngIf="!destacada.checked">No</span>
+                                </div>
                             </fieldset>
                         </div>
                     </div>
@@ -87,8 +94,8 @@
             <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Lista de categorías</h4>
         </div>
         <div class="modal-body">
-            <div class="contenedor-tabla d-flex table-responsive">
-                <table class="table border fs-12px">
+            <div class="contenedor-tabla d-flex table-responsive border rounded-4">
+                <table class="table fs-12px">
                     <thead>
                     <tr>
                       <th scope="col">Nombre</th>
@@ -114,14 +121,14 @@
                                 <span class="me-1">{{categoria.linkMarcacion | slice:0:50}}... </span>  
                                 <span class="copiar-portapapeles" (click)="copiarAlPortapapeles(categoria.linkMarcacion)"></span> 
                             </td>
-                            <td class="texto-rojo cursor-pointer" (click)="this.abrirModalActualizarCategoria(categoria)">Editar</td>
+                            <td class="texto-rojo cursor-pointer" (click)="this.abrirModalActualizarCategoria(categoria)"><img src="./assets/img/editar.svg" alt=""></td>
                             <td>
                                 <label class="switch">
                                     <input type="checkbox" [checked]="categoria.estado" (change)="this.cambiarEstadoCategoria(indice)">
                                     <span class="slider round"></span>
                                 </label>
-                                <span *ngIf="categoria.estado">Sí</span>
-                                <span *ngIf="!categoria.estado">No</span>
+                                <span class="fs-12px ms-1 fw-semibold" *ngIf="categoria.estado">Sí</span>
+                                <span class="fs-12px ms-1 fw-semibold" *ngIf="!categoria.estado">No</span>
                             </td>
                         </tr>
                     </tbody>

@@ -1,3 +1,6 @@
+.card-header{
+    background-color: #fff;
+}
 .card{
     border-radius: 10px !important;
     box-shadow: 0px 0px 20px #00000029 !important;
@@ -33,29 +36,26 @@
     outline: 0;
     box-shadow: none !important;
 }
-
-.form-control[type='file']{
-    overflow: visible !important;
-    backface-visibility:visible;
+.archivo{
+    width: 100%;
     position: relative;
+}
+.archivo::before{
+    position: absolute;
+    content: 'Cargar imagen';
+    color: var(--rojo-flamingo);
+    width: 128px;
+    height: 40px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+    right: 0;
+    border-radius: 10px;
+    border: 1px solid var(--rojo-flamingo);
 }
 .form-control[type='file']::-webkit-file-upload-button {
     display: none;
     visibility: hidden;
-}
-.form-control[type='file']::before{
-    position: absolute;
-    right: 0;
-    top: -1px;
-    content: 'Cargar imagen';
-    color: var(--rojo-flamingo);
-    height: 40px;
-    padding: 0 10px;
-    line-height: 3;
-    font-size: 12px;
-    font-weight: bold;
-    outline: none;
-    white-space: nowrap;
 }
 
 .form-select {
@@ -64,7 +64,7 @@
     height: 40px;
     padding: 7px 10px !important;
     padding-right: 15px !important;
-    background-position: right 1px center;
+    background-position: right 10px center;
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
@@ -73,6 +73,8 @@
 }
 .form-select.sm{
     height: 30px;
+    background-position: right 1px center !important;
+
 }
 .form-select:focus {
     border-color: var(--naranja-flamingo);
@@ -87,13 +89,16 @@
 .page-link {
     position: relative;
     display: block;
-    padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
-    font-size: var(--bs-pagination-font-size);
-    color: var(--rojo-flamingo);
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--gris);
     text-decoration: none;
     background-color: var(--bs-pagination-bg);
     border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.page-link:hover {
+    color: var(--gris);
 }
 .active>.page-link, .page-link.active {
     z-index: 3;
@@ -104,9 +109,11 @@
 
 ngb-pagination li{
     font-weight: bold;
+    color: black;
 }
 ngb-pagination li:first-child a span, ngb-pagination li:last-child a span{
     display: none;
+    color: black;
 }
 ngb-pagination li:first-child a::before{
     content: 'Ant.';
@@ -137,4 +144,8 @@ ngb-pagination li:last-child a::before{
 
 .modal-header{
     padding: 0.75rem 0.75rem;
+}
+
+.table-responsive th{
+    padding: 15px 10px;
 }

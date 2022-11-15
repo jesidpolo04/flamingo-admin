@@ -1,7 +1,7 @@
 export interface Venta {
     id: string
     ordenCompra: string
-    fechaOrden: Date
+    fechaOrden: string
     valorTotal: number
     estado: boolean
     flete: number

@@ -9,7 +9,7 @@ import { AliadosService } from 'src/app/administrador/servicios/aliados.service'
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
 import { TraficoService } from 'src/app/administrador/servicios/trafico.service';
-import { MESES } from 'src/app/administrador/utilidades/Fechas';
+import { formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
 
 @Component({
   selector: 'app-trafico-clientes',
@@ -26,7 +26,7 @@ export class TraficoClientesComponent implements OnInit {
   public marcaciones:Marcacion[] = []
   public categorias:Categoria[] = []
   public aliados:Aliado[] = []
-  public descripcionDeFecha:string = '24 de octubre de 2022'
+  public descripcionDeFecha:string = ''
 
   constructor(
     private servicioTrafico:TraficoService, 
@@ -34,15 +34,17 @@ export class TraficoClientesComponent implements OnInit {
     private servicioAliados:AliadosService,
     private servicioCabecera:CabeceraService) { 
     this.servicioCabecera.actualizarTitulo('Consulta de tráfico de clientes')
+    const hoy = new Date()
     this.formulario = new FormGroup({
-      fechaInicial: new FormControl(''),
-      fechaFinal: new FormControl(''),
+      fechaInicial: new FormControl(`${hoy.getFullYear()}-${hoy.getMonth() + 1}-${hoy.getDate()}`),
+      fechaFinal: new FormControl(`${hoy.getFullYear()}-${hoy.getMonth() + 1}-${hoy.getDate()}`),
       asesor: new FormControl(''),
       aliado: new FormControl(''),
       categoria: new FormControl(''),
       termino: new FormControl('')
     })
     this.criterios = this.obtenerCriteriosDeBusqueda()
+    this.generarDescripcionDeFechas()
   }
 
   ngOnInit(): void {
@@ -60,7 +62,10 @@ export class TraficoClientesComponent implements OnInit {
 
   public obtenerMarcaciones(criterios:CriteriosBusquedaMarcaciones, pagina:number = 1){
     this.servicioTrafico.buscarMarcaciones(criterios, pagina, this.porPagina).subscribe(respuesta => {
-      this.marcaciones = respuesta.marcaciones
+      this.marcaciones = respuesta.marcaciones.map(marcacion => {
+        marcacion.fecha = formatearFecha(marcacion.fecha)
+        return marcacion
+      })
       this.totalRegistros = respuesta.paginacion.totalRegistros
     })
   }
@@ -82,6 +87,11 @@ export class TraficoClientesComponent implements OnInit {
       this.criterios,
       pagina
     )
+  }
+
+  public cambiarPorPagina(porPagina:string){
+    this.porPagina = parseInt(porPagina)
+    this.obtenerMarcaciones(this.criterios, 1)
   }
 
   public obtenerCriteriosDeBusqueda():CriteriosBusquedaMarcaciones{
@@ -120,12 +130,15 @@ export class TraficoClientesComponent implements OnInit {
     const fechaFinal = this.criterios.fechaFinal
     if(!fechaInicial && !fechaFinal){
       this.descripcionDeFecha = `Desde siempre`
+      return
     }
     if(fechaInicial && !fechaFinal){
       this.descripcionDeFecha = `Desde el ${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
+      return
     }
     if(fechaFinal && !fechaInicial){
       this.descripcionDeFecha = `Hasta el ${fechaFinal.getUTCDate()} de ${MESES[fechaFinal.getUTCMonth()]} de ${fechaFinal.getUTCFullYear()}`
+      return
     }
     if(fechaInicial && fechaFinal){
       if( 

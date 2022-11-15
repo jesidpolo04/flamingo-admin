@@ -75,6 +75,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
 
   public limpiarFormulario():void{
     this.formulario.reset()
+    this.formulario.controls['categoria'].setValue('');
     this.formulario.controls['destacada'].setValue(false)
   }
 

@@ -59,9 +59,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <ngb-pagination
-                        [collectionSize]="this.total" [(page)]="pagina" [pageSize]="limite" (pageChange)="this.cambioDePagina($event)">
-                    </ngb-pagination>
+                    <div class="d-flex">
+                        <div class="ms-auto">
+                            <ngb-pagination
+                                [collectionSize]="this.total" [(page)]="pagina" [pageSize]="limite" (pageChange)="this.cambioDePagina($event)">
+                            </ngb-pagination>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
+import { AutenticacionService } from 'src/app/autenticacion/servicios/autenticacion.service';
 import { CabeceraService } from '../../servicios/cabecera.service';
 
 @Component({
@@ -10,11 +11,11 @@ import { CabeceraService } from '../../servicios/cabecera.service';
 export class BarraNavegacionComponent implements OnInit {
   @Output() usuarioQuiereCerrarSesion:EventEmitter<void>
   @Output() menuLateralDesplegado:EventEmitter<void>
-
+  public nombreDeUsuario = ''
   public tituloSeccion = '';
   public menuOpcionesDeUsuarioColapsado = true;
 
-  constructor(private servicioCabecera:CabeceraService) {
+  constructor(private servicioCabecera:CabeceraService, private servicioAutenticacion:AutenticacionService) {
     this.usuarioQuiereCerrarSesion = new EventEmitter<void>()
     this.menuLateralDesplegado = new EventEmitter<void>()
     this.servicioCabecera.suscribirseACambioDeTitulo().subscribe(tituloSeccion =>{
@@ -23,6 +24,7 @@ export class BarraNavegacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nombreDeUsuario = this.obtenerNombreDeUsuario()
   }
 
   public abrirMenuLateral(){
@@ -31,5 +33,11 @@ export class BarraNavegacionComponent implements OnInit {
 
   public cerrarSesion(){
     this.usuarioQuiereCerrarSesion.emit()
+  }
+
+  public obtenerNombreDeUsuario():string{
+    const nombreUsuario = localStorage.getItem(this.servicioAutenticacion.llaveNombreUsuarioLocalStorage)
+    if(!nombreUsuario) return 'Usuario';
+    else return nombreUsuario;
   }
 }

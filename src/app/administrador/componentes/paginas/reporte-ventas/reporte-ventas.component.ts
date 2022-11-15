@@ -8,7 +8,7 @@ import { Venta } from 'src/app/administrador/modelos/ventas/Venta';
 import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { VentasService } from 'src/app/administrador/servicios/ventas.service';
-import { MESES } from 'src/app/administrador/utilidades/Fechas';
+import { formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
 @Component({
   selector: 'app-reporte-ventas',
   templateUrl: './reporte-ventas.component.html',
@@ -36,9 +36,10 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
 
   public constructor(private servicioAliados:AliadosService, private servicioVentas:VentasService, private servicioCabecera:CabeceraService) {
     this.servicioCabecera.actualizarTitulo('Consulta de reporte de ventas')
+    const hoy = new Date()
     this.formulario = new FormGroup({
-      fechaInicial: new FormControl(''),
-      fechaFinal: new FormControl(''),
+      fechaInicial: new FormControl(`${hoy.getFullYear()}-${hoy.getMonth() + 1}-${hoy.getDate()}`),
+      fechaFinal: new FormControl(`${hoy.getFullYear()}-${hoy.getMonth() + 1}-${hoy.getDate()}`),
       asesor: new FormControl(''),
       aliado: new FormControl(''),
       correo: new FormControl(''),
@@ -62,8 +63,13 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
   }
 
   public obtenerVentas(criterios:CriteriosBusquedaVentas, pagina:number, porPagina:number){
+    console.log(criterios.fechaInicial?.toString())
+    console.log(criterios.fechaFinal?.toString())
     this.servicioVentas.buscarVentas(criterios, pagina, porPagina).subscribe(respuesta => {
-      this.ventas = respuesta.ventas;
+      this.ventas = respuesta.ventas.map(venta => {
+        venta.fechaOrden = formatearFecha(venta.fechaOrden)
+        return venta
+      });
       this.totalRegistros = respuesta.paginacion.totalRegistros;
     })
   }
@@ -109,9 +115,14 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
     const aliado = this.formulario.controls['aliado']
     const correo = this.formulario.controls['correo']
     const termino = this.formulario.controls['termino']
+    let fechaFinalDate = undefined;
+    if(fechaFinal && fechaFinal.value !== ''){
+      fechaFinalDate = new Date(fechaFinal.value)
+      fechaFinalDate.setUTCHours(23,59,59)
+    }
     return new CriteriosBusquedaVentas(
       fechaInicial && fechaInicial.value !== '' ? new Date(fechaInicial.value) : undefined,
-      fechaFinal && fechaFinal.value !== '' ? new Date(fechaFinal.value) : undefined, 
+      fechaFinalDate,
       correo && correo.value !== '' ? correo.value : undefined,
       asesor && asesor.value !== '' ? asesor.value : undefined, 
       aliado && aliado.value !== '' ? aliado.value : undefined,

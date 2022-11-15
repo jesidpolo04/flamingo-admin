@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { toString } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
+import { formatearFecha } from 'src/app/administrador/utilidades/Fechas';
 import { Aliado } from '../../../modelos/aliados/Aliado';
 import { AliadosService } from '../../../servicios/aliados.service';
 import { PopupComponent } from '../../popup/popup.component';
@@ -28,19 +30,21 @@ export class GestionDeAliadosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.servicioAliados.obtenerAliados(this.pagina, this.limite).subscribe(respuesta =>{
-      this.aliados = respuesta.aliados;
+    this.obtenerAliados(this.pagina, this.limite)
+  }
+  
+  public obtenerAliados(pagina:number, porPagina:number){
+    this.servicioAliados.obtenerAliados(pagina, porPagina).subscribe(respuesta =>{
+      this.aliados = respuesta.aliados.map(aliado => {
+        aliado.creacion = formatearFecha(aliado.creacion)
+        return aliado
+      });
       this.total = respuesta.paginacion.totalRegistros;
     })
   }
 
   public cambioDePagina(pagina:number):void{
-    this.servicioAliados.obtenerAliados(pagina, this.limite).subscribe((respuesta) => {
-      console.log('nueva pagina', pagina)
-      this.aliados = respuesta.aliados;
-      this.total = respuesta.paginacion.totalRegistros
-      console.log('nuevo total', this.total)
-    }) 
+    this.obtenerAliados(pagina, this.limite)
   }
 
   public cambiarPaginado(porPagina:string){
@@ -60,10 +64,7 @@ export class GestionDeAliadosComponent implements OnInit {
   }
 
   public refrescarListaDeAliados():void{
-    this.servicioAliados.obtenerAliados(this.pagina, this.limite).subscribe((respuesta) => {
-      this.aliados = respuesta.aliados
-      this.total = respuesta.paginacion.totalRegistros
-    })
+    this.obtenerAliados(this.pagina, this.limite)
   }
 
   public abrirModalCreacionAliado():void{
