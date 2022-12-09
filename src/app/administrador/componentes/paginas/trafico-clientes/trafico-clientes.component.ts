@@ -9,7 +9,7 @@ import { AliadosService } from 'src/app/administrador/servicios/aliados.service'
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
 import { TraficoService } from 'src/app/administrador/servicios/trafico.service';
-import { formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
+import { establecerFecha, formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
 
 @Component({
   selector: 'app-trafico-clientes',
@@ -102,8 +102,8 @@ export class TraficoClientesComponent implements OnInit {
     const categoria = this.formulario.controls['categoria']
     const termino = this.formulario.controls['termino']
     return new CriteriosBusquedaMarcaciones(
-      fechaInicial && fechaInicial.value !== '' ? new Date(fechaInicial.value) : undefined,
-      fechaFinal && fechaFinal.value !== '' ? new Date(fechaFinal.value) : undefined, 
+      fechaInicial && fechaInicial.value !== '' ? establecerFecha(fechaInicial.value, 0, 0, 0, 0) : undefined,
+      fechaFinal && fechaFinal.value !== '' ? establecerFecha(fechaFinal.value, 23, 59, 59, 999) : undefined, 
       undefined,
       asesor && asesor.value !== '' ? asesor.value : undefined, 
       aliado && aliado.value !== '' ? aliado.value : undefined, 
@@ -133,27 +133,27 @@ export class TraficoClientesComponent implements OnInit {
       return
     }
     if(fechaInicial && !fechaFinal){
-      this.descripcionDeFecha = `Desde el ${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
+      this.descripcionDeFecha = `Desde el ${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
       return
     }
     if(fechaFinal && !fechaInicial){
-      this.descripcionDeFecha = `Hasta el ${fechaFinal.getUTCDate()} de ${MESES[fechaFinal.getUTCMonth()]} de ${fechaFinal.getUTCFullYear()}`
+      this.descripcionDeFecha = `Hasta el ${fechaFinal.getDate()} de ${MESES[fechaFinal.getMonth()]} de ${fechaFinal.getFullYear()}`
       return
     }
     if(fechaInicial && fechaFinal){
       if( 
-          fechaInicial.getUTCFullYear() === fechaFinal.getUTCFullYear() &&
-          fechaInicial.getUTCMonth() === fechaFinal.getUTCMonth() &&
-          fechaInicial.getUTCDate() === fechaFinal.getUTCDate()
+          fechaInicial.getFullYear() === fechaFinal.getFullYear() &&
+          fechaInicial.getMonth() === fechaFinal.getMonth() &&
+          fechaInicial.getDate() === fechaFinal.getDate()
         ){
           console.log('Entro a la condi')
-          this.descripcionDeFecha = `${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
+          this.descripcionDeFecha = `${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
           return
         }
     }
     if(fechaInicial && fechaFinal){
-      this.descripcionDeFecha = `Del ${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
-      this.descripcionDeFecha += ` hasta el ${fechaFinal.getUTCDate()} de ${MESES[fechaFinal.getUTCMonth()]} de ${fechaFinal.getUTCFullYear()}`
+      this.descripcionDeFecha = `Del ${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
+      this.descripcionDeFecha += ` hasta el ${fechaFinal.getDate()} de ${MESES[fechaFinal.getMonth()]} de ${fechaFinal.getFullYear()}`
     }
     
   }

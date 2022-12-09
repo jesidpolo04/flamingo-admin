@@ -16,8 +16,22 @@ export const MESES = [
 export function formatearFecha(fecha: string | Date):string{
     if(typeof(fecha) === 'string'){
         const fechaDate = new Date(fecha)
-        return `${fechaDate.getUTCDate()} / ${fechaDate.getUTCMonth() + 1} / ${fechaDate.getUTCFullYear()}`
+        return `${fechaDate.getDate()} / ${fechaDate.getMonth() + 1} / ${fechaDate.getFullYear()}`
     }else{
-        return `${fecha.getUTCDate()} / ${fecha.getUTCMonth() + 1} / ${fecha.getUTCFullYear()}`
+        return `${fecha.getDate()} / ${fecha.getMonth() + 1} / ${fecha.getFullYear()}`
     }
+}
+
+export function establecerFecha(inputFecha:string, hora:number, minuto:number, segundo:number, milisegundo?:number): Date{
+    if(inputFecha === ''){
+        throw new Error('La fecha debe tener el formato yyyy-MM-dd')
+    }
+    const arregloFecha = inputFecha.split('-')
+    const anio = parseInt(arregloFecha[0])
+    const mes = parseInt(arregloFecha[1]) - 1
+    const dia = parseInt(arregloFecha[2])
+    const fecha = new Date()
+    fecha.setFullYear(anio, mes, dia)
+    fecha.setHours(hora, minuto, segundo, milisegundo ? milisegundo : 0)
+    return fecha
 }

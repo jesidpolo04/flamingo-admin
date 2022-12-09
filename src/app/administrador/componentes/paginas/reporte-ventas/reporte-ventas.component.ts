@@ -8,7 +8,7 @@ import { Venta } from 'src/app/administrador/modelos/ventas/Venta';
 import { AliadosService } from 'src/app/administrador/servicios/aliados.service';
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { VentasService } from 'src/app/administrador/servicios/ventas.service';
-import { formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
+import { establecerFecha, formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
 @Component({
   selector: 'app-reporte-ventas',
   templateUrl: './reporte-ventas.component.html',
@@ -63,8 +63,6 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
   }
 
   public obtenerVentas(criterios:CriteriosBusquedaVentas, pagina:number, porPagina:number){
-    console.log(criterios.fechaInicial?.toString())
-    console.log(criterios.fechaFinal?.toString())
     this.servicioVentas.buscarVentas(criterios, pagina, porPagina).subscribe(respuesta => {
       this.ventas = respuesta.ventas.map(venta => {
         venta.fechaOrden = formatearFecha(venta.fechaOrden)
@@ -115,14 +113,9 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
     const aliado = this.formulario.controls['aliado']
     const correo = this.formulario.controls['correo']
     const termino = this.formulario.controls['termino']
-    let fechaFinalDate = undefined;
-    if(fechaFinal && fechaFinal.value !== ''){
-      fechaFinalDate = new Date(fechaFinal.value)
-      fechaFinalDate.setUTCHours(23,59,59)
-    }
     return new CriteriosBusquedaVentas(
-      fechaInicial && fechaInicial.value !== '' ? new Date(fechaInicial.value) : undefined,
-      fechaFinalDate,
+      fechaInicial && fechaInicial.value !== '' ? establecerFecha(fechaInicial.value, 0, 0, 0, 0) : undefined,
+      fechaFinal && fechaFinal.value !== '' ? establecerFecha(fechaFinal.value, 23, 59, 59, 999) : undefined, 
       correo && correo.value !== '' ? correo.value : undefined,
       asesor && asesor.value !== '' ? asesor.value : undefined, 
       aliado && aliado.value !== '' ? aliado.value : undefined,
@@ -142,25 +135,25 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
       this.descripcionDeFecha = `Desde siempre`
     }
     if(fechaInicial && !fechaFinal){
-      this.descripcionDeFecha = `Desde el ${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
+      this.descripcionDeFecha = `Desde el ${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
     }
     if(fechaFinal && !fechaInicial){
-      this.descripcionDeFecha = `Hasta el ${fechaFinal.getUTCDate()} de ${MESES[fechaFinal.getUTCMonth()]} de ${fechaFinal.getUTCFullYear()}`
+      this.descripcionDeFecha = `Hasta el ${fechaFinal.getDate()} de ${MESES[fechaFinal.getMonth()]} de ${fechaFinal.getFullYear()}`
     }
     if(fechaInicial && fechaFinal){
       if( 
-          fechaInicial.getUTCFullYear() === fechaFinal.getUTCFullYear() &&
-          fechaInicial.getUTCMonth() === fechaFinal.getUTCMonth() &&
-          fechaInicial.getUTCDate() === fechaFinal.getUTCDate()
+          fechaInicial.getFullYear() === fechaFinal.getFullYear() &&
+          fechaInicial.getMonth() === fechaFinal.getMonth() &&
+          fechaInicial.getDate() === fechaFinal.getDate()
         ){
           console.log('Entro a la condi')
-          this.descripcionDeFecha = `${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
+          this.descripcionDeFecha = `${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
           return
         }
     }
     if(fechaInicial && fechaFinal){
-      this.descripcionDeFecha = `Del ${fechaInicial.getUTCDate()} de ${MESES[fechaInicial.getUTCMonth()]} de ${fechaInicial.getUTCFullYear()}`
-      this.descripcionDeFecha += ` hasta el ${fechaFinal.getUTCDate()} de ${MESES[fechaFinal.getUTCMonth()]} de ${fechaFinal.getUTCFullYear()}`
+      this.descripcionDeFecha = `Del ${fechaInicial.getDate()} de ${MESES[fechaInicial.getMonth()]} de ${fechaInicial.getFullYear()}`
+      this.descripcionDeFecha += ` hasta el ${fechaFinal.getDate()} de ${MESES[fechaFinal.getMonth()]} de ${fechaFinal.getFullYear()}`
     }
     
   }
