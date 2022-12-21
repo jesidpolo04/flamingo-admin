@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Aliado } from 'src/app/administrador/modelos/aliados/Aliado';
 import { Categoria } from 'src/app/administrador/modelos/categorias/Categoria';
@@ -10,6 +10,8 @@ import { CabeceraService } from 'src/app/administrador/servicios/cabecera.servic
 import { CategoriasService } from 'src/app/administrador/servicios/categorias.service';
 import { TraficoService } from 'src/app/administrador/servicios/trafico.service';
 import { establecerFecha, formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-trafico-clientes',
@@ -17,6 +19,7 @@ import { establecerFecha, formatearFecha, MESES } from 'src/app/administrador/ut
   styleUrls: ['./trafico-clientes.component.css']
 })
 export class TraficoClientesComponent implements OnInit {
+  @ViewChild('tablaTrafico') tablaTrafico!:ElementRef
   public totalRegistros = 0;
   public pagina = 1;
   public porPagina = 10;
@@ -156,6 +159,21 @@ export class TraficoClientesComponent implements OnInit {
       this.descripcionDeFecha += ` hasta el ${fechaFinal.getDate()} de ${MESES[fechaFinal.getMonth()]} de ${fechaFinal.getFullYear()}`
     }
     
+  }
+
+  public exportarExcel(){
+    let nombre = "Reporte de tráfico.xlsx"
+    if(this.formulario.controls['fechaInicial'].value === this.formulario.controls['fechaFinal'].value){
+      nombre = `Reporte de tráfico ${this.formulario.controls['fechaInicial'].value}.xlsx`
+    }
+    nombre = `Reporte de tráfico de ${this.formulario.controls['fechaInicial'].value} a ${this.formulario.controls['fechaFinal'].value}.xlsx`
+    let element = this.tablaTrafico.nativeElement
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
+
+    XLSX.writeFile(book, nombre);
   }
 
 }

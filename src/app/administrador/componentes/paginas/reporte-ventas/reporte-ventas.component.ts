@@ -9,12 +9,15 @@ import { AliadosService } from 'src/app/administrador/servicios/aliados.service'
 import { CabeceraService } from 'src/app/administrador/servicios/cabecera.service';
 import { VentasService } from 'src/app/administrador/servicios/ventas.service';
 import { establecerFecha, formatearFecha, MESES } from 'src/app/administrador/utilidades/Fechas';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-reporte-ventas',
   templateUrl: './reporte-ventas.component.html',
   styleUrls: ['./reporte-ventas.component.css']
 })
 export class ReporteVentasComponent implements OnInit, AfterViewInit {
+  @ViewChild('tablaVentas') tablaVentas!:ElementRef
   @ViewChild('baseChart') canvas!:ElementRef
   public descripcionDeFecha:string = ''
   public totalRegistros = 0;
@@ -209,6 +212,21 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
       if(indice === colores.length) indice = 0;
     }
     return coloresDeBarras;
+  }
+
+  public exportarExcel(){
+    let nombre = "Reporte de ventas.xlsx"
+    if(this.formulario.controls['fechaInicial'].value === this.formulario.controls['fechaFinal'].value){
+      nombre = `Reporte de ventas ${this.formulario.controls['fechaInicial'].value}.xlsx`
+    }
+    nombre = `Reporte de ventas de ${this.formulario.controls['fechaInicial'].value} a ${this.formulario.controls['fechaFinal'].value}.xlsx`
+    let element = this.tablaVentas.nativeElement
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
+
+    XLSX.writeFile(book, nombre);
   }
 
 }
