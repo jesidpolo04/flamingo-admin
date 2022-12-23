@@ -4,7 +4,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10" autocomplete="off">
             <div class="row">
                 <div class="col-4">
                     <fieldset>
@@ -35,13 +35,41 @@
                 <div class="col-4">
                     <fieldset>
                         <label for="">Usuario</label>
-                        <input type="text" class="form-control" formControlName="usuario">
+                        <input type="text" class="form-control" formControlName="usuario" autocomplete="off">
                         <span class="validacion"
                         *ngIf="
                             this.formulario.controls['usuario'].errors &&
                             this.formulario.controls['usuario'].errors['required'] && 
                             this.formulario.controls['usuario'].dirty">
                             Requerido.
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Contraseña</label>
+                        <input type="password" class="form-control" formControlName="clave" autocomplete="off">
+                        <span class="validacion"
+                        *ngIf="
+                            this.formulario.controls['clave'].errors &&
+                            this.formulario.controls['clave'].errors['required'] && 
+                            this.formulario.controls['clave'].dirty">
+                            Requerido.
+                        </span>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Confirmar contraseña</label>
+                        <input type="password" class="form-control" formControlName="confirmarClave" autocomplete="off">
+                        <span class="validacion"
+                        *ngIf="
+                            this.formulario.controls['confirmarClave'].errors &&
+                            this.formulario.controls['confirmarClave'].errors['required'] && 
+                            this.formulario.controls['confirmarClave'].dirty">
+                            Confirma la contraseña.
                         </span>
                     </fieldset>
                 </div>
