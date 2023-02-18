@@ -1,7 +1,7 @@
 <ng-template #modal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Crear categoría</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Crear categoría</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
         <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
@@ -10,23 +10,48 @@
                     <fieldset>
                         <label for="">Nombre de la categoria</label>
                         <input type="text" class="form-control" formControlName="nombre">
-                        <span class="validacion"
-                        *ngIf="
+                        <span class="validacion" *ngIf="
                             this.formulario.controls['nombre'].errors &&
                             this.formulario.controls['nombre'].errors['required'] && 
                             this.formulario.controls['nombre'].dirty">
                             Requerido.
                         </span>
                     </fieldset>
-                    
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <fieldset>
+                            <label for="">¿Es una subcategoría?</label>
+                            <select #selectSubcategoria type="text" class="form-select" formControlName="subcategoria">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span class="validacion" *ngIf="
+                            this.formulario.controls['subcategoria'].errors &&
+                            this.formulario.controls['subcategoria'].errors['required'] && 
+                            this.formulario.controls['subcategoria'].dirty">
+                                Requerido.
+                            </span>
+                        </fieldset>
+                    </div>
+                    <div class="col-9">
+                        <fieldset *ngIf="selectSubcategoria.value === 'true'">
+                            <label for="">Categoría padre</label>
+                            <select type="text" class="form-select" formControlName="padre">
+                                <option *ngFor="let categoriaPadre of categoriasPadre" [value]="categoriaPadre.id">{{categoriaPadre.nombre}}</option>
+                            </select>
+                            
+                        </fieldset>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cancelar</button>
+        <button type="button" class="boton-flamingo rojo delineado"
+            (click)="modal.close('Close click')">Cancelar</button>
         <button type="button" class="boton-flamingo rojo relleno" (click)="this.crearCategoria()">
-            <img src="assets/img/+.svg" alt=""> 
+            <img src="assets/img/+.svg" alt="">
             Crear categoría
         </button>
     </div>

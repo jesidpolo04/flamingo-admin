@@ -17,19 +17,20 @@ import { ModalActualizarCategoriasAliadoComponent } from '../modal-actualizar-ca
   styleUrls: ['./modal-gestion-categorias-aliado.component.css']
 })
 export class ModalGestionCategoriasAliadoComponent implements OnInit {
-  @ViewChild('popup') popup!:PopupComponent
-  @ViewChild('modal') modal!:ElementRef
-  @ViewChild('modalActualizarCategoria') modalActualizarCategoria!:ModalActualizarCategoriasAliadoComponent
-  public aliado?:Aliado
-  public categorias:Categoria[] = []
-  public categoriasDeAliado:CategoriaAliado[] = []
-  public formulario:FormGroup
+  @ViewChild('popup') popup!: PopupComponent
+  @ViewChild('modal') modal!: ElementRef
+  @ViewChild('modalActualizarCategoria') modalActualizarCategoria!: ModalActualizarCategoriasAliadoComponent
+  public aliado?: Aliado
+  public categoriasPadre: Categoria[] = []
+  public categorias: Categoria[] = []
+  public categoriasDeAliado: CategoriaAliado[] = []
+  public formulario: FormGroup
 
   constructor(
-    private servicioModal:NgbModal, 
-    private servicioAliados:AliadosService, 
-    private servicioCategorias:CategoriasService
-  ) { 
+    private servicioModal: NgbModal,
+    private servicioAliados: AliadosService,
+    private servicioCategorias: CategoriasService
+  ) {
     this.formulario = new FormGroup({
       categoria: new FormControl('', [Validators.required]),
       imagen: new FormControl('', [Validators.required]),
@@ -40,15 +41,25 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.servicioCategorias.obtenerCategorias().subscribe(respuesta =>{
+    this.obtenerCategoriasPadre(1, 100);
+  }
+
+  refrescarCategorias(idCategoriaPadre: string){
+    this.servicioCategorias.obtenerCategoriasHijas(1, 100, idCategoriaPadre).subscribe( respuesta => {
       this.categorias = respuesta.categorias
     })
   }
 
-  public abrir(aliado:Aliado){
+  public obtenerCategoriasPadre(pagina: number, limite: number) {
+    this.servicioCategorias.obtenerCategoriasPadre(pagina, limite).subscribe(respuesta => {
+      this.categoriasPadre = respuesta.categorias_padre
+    })
+  }
+
+  public abrir(aliado: Aliado) {
     this.limpiarFormulario()
     this.aliado = aliado
-    this.servicioAliados.listarCategorias(this.aliado.id).subscribe(respuesta =>{
+    this.servicioAliados.listarCategorias(this.aliado.id).subscribe(respuesta => {
       this.categoriasDeAliado = respuesta.categorias
     })
     this.servicioModal.open(this.modal, {
@@ -57,14 +68,14 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     })
   }
 
-  public cerrar():void{
+  public cerrar(): void {
     this.servicioModal.dismissAll()
   }
 
-  public cambioDeImagen(event:Event){
+  public cambioDeImagen(event: Event) {
     const target = event.target as HTMLInputElement;
-    if(!target) return;
-    if(!target.files) return;
+    if (!target) return;
+    if (!target.files) return;
     if (target.files.length > 0) {
       const file = target.files[0];
       this.formulario.patchValue({
@@ -73,14 +84,14 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     }
   }
 
-  public limpiarFormulario():void{
+  public limpiarFormulario(): void {
     this.formulario.reset()
     this.formulario.controls['categoria'].setValue('');
     this.formulario.controls['destacada'].setValue(false)
   }
 
-  public marcarFormularioComoSucio():void{
-    (<any>Object).values(this.formulario.controls).forEach((control:FormControl) => {
+  public marcarFormularioComoSucio(): void {
+    (<any>Object).values(this.formulario.controls).forEach((control: FormControl) => {
       control.markAsDirty();
       if (control) {
         control.markAsDirty()
@@ -88,17 +99,17 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     });
   }
 
-  public refrescarListaDeCategorias():void{
-    if(this.aliado){
+  public refrescarListaDeCategorias(): void {
+    if (this.aliado) {
       this.servicioAliados.listarCategorias(this.aliado.id).subscribe(respuesta => {
         this.categoriasDeAliado = respuesta.categorias
       })
     }
   }
 
-  public asignarCategoria():void{
-    if(this.formulario.invalid){
-      this.popup.abrirPopupFallido('Formulario inválido','rellena todos los campos correctamente.')
+  public asignarCategoria(): void {
+    if (this.formulario.invalid) {
+      this.popup.abrirPopupFallido('Formulario inválido', 'rellena todos los campos correctamente.')
       this.marcarFormularioComoSucio()
       return;
     }
@@ -112,30 +123,30 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     )).subscribe(respuesta => {
       this.refrescarListaDeCategorias()
       this.popup.abrirPopupExitoso('Guardado con éxito')
-    }, (error:HttpErrorResponse) =>{
+    }, (error: HttpErrorResponse) => {
       this.popup.abrirPopupFallido('Error', error.error.mensaje)
     })
   }
 
-  public cambiarEstadoCategoria(indiceCategoria:number){
-    this.servicioAliados.cambiarEstadoCategoriaAliado(this.aliado!.id, this.categoriasDeAliado[indiceCategoria].id).subscribe(respuesta =>{
+  public cambiarEstadoCategoria(indiceCategoria: number) {
+    this.servicioAliados.cambiarEstadoCategoriaAliado(this.aliado!.id, this.categoriasDeAliado[indiceCategoria].id).subscribe(respuesta => {
       this.categoriasDeAliado[indiceCategoria].estado = !this.categoriasDeAliado[indiceCategoria].estado
-    }, (error:HttpErrorResponse)=>{
+    }, (error: HttpErrorResponse) => {
       this.popup.abrirPopupFallido('Error')
     })
   }
 
-  public abrirModalActualizarCategoria(categoria:CategoriaAliado){
+  public abrirModalActualizarCategoria(categoria: CategoriaAliado) {
     this.modalActualizarCategoria.abrir(this.aliado!, categoria)
   }
 
-  public copiarAlPortapapeles(texto:string){
+  public copiarAlPortapapeles(texto: string) {
     navigator.clipboard.writeText(texto)
     this.popup.abrirPopupExitoso('Copiado al portapapeles')
   }
 
-  public debugDestacada(){
-    console.log(this.formulario.controls['destacada'].value) 
+  public debugDestacada() {
+    console.log(this.formulario.controls['destacada'].value)
   }
 
 }

@@ -23,7 +23,31 @@
                     <div class="row mb-2">
                         <div class="col-6">
                             <fieldset>
-                                <label for="">Nombre de la categoría</label>
+                                <label for="">Nombre de la categoría padre</label>
+                                <select 
+                                #selectorCategoriaPadre 
+                                class="form-select" 
+                                name="" 
+                                formControlName="categoria" 
+                                aria-placeholder="Seleccionar" 
+                                (change)="refrescarCategorias(selectorCategoriaPadre.value)">
+                                    <option value="" selected disabled>Seleccionar ...</option>
+                                    <option *ngFor="let categoriaPadre of this.categoriasPadre" [value]="categoriaPadre.id">{{ categoriaPadre.nombre }}</option>
+                                </select>
+                                <span class="validacion"
+                                    *ngIf="
+                                    this.formulario.controls['categoria'].errors &&
+                                    this.formulario.controls['categoria'].errors['required'] && 
+                                    this.formulario.controls['categoria'].dirty">
+                                    Selecciona una categoría.
+                                </span>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <fieldset>
+                                <label for="">Nombre de la subcategoría</label>
                                 <select class="form-select" name="" formControlName="categoria" aria-placeholder="Seleccionar">
                                     <option value="" selected disabled>Seleccionar ...</option>
                                     <option *ngFor="let categoria of this.categorias" [value]="categoria.id">{{categoria.nombre}}</option>
