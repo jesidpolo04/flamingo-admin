@@ -38,6 +38,8 @@ export class GestionDeCategoriasComponent implements OnInit {
     })
   }
   public refrescarListaDeCategorias():void{
+    this.modalActualizarCategoria.ngOnInit()
+    this.modalCreacionCategoria.ngOnInit()
     this.servicioCategorias.obtenerCategorias(this.pagina, this.limite).subscribe(respuesta => {
       this.categorias = this.filtrarCategorias(this.filtro, respuesta.categorias) 
       this.total = respuesta.paginacion.totalRegistros
