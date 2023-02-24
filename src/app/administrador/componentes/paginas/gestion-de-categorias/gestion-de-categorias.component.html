@@ -47,6 +47,7 @@
                             <tr>
                               <th scope="col">Nombre categoría</th>
                               <th scope="col">Fecha de creación</th>
+                              <th scope="col">¿Es subcategoría?</th>
                               <th scope="col" colspan="2">Acciones</th>
                             </tr>
                             </thead>
@@ -54,6 +55,10 @@
                                 <tr *ngFor="let categoria of this.categorias; let index = index">
                                     <td>{{ categoria.nombre }}</td>
                                     <td>{{ categoria.creacion }}</td>
+                                    <td>
+                                        <ng-container *ngIf="!categoria.padre">No</ng-container>
+                                        <ng-container *ngIf="categoria.padre">Sí</ng-container>
+                                    </td>
                                     <td class="texto-naranja fw-semibold" (click)="this.abrirModalActualizarCategoria(categoria)">Editar</td>
                                 </tr>
                             </tbody>
