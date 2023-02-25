@@ -194,24 +194,29 @@
                                 <option value="300">300</option>
                                 <option value="500">500</option>
                                 <option value="1000">1000</option>
+                                <option value="999999999">Todos</option>
                             </select>
                         </span>
                         <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
                     </div>
                 </div>
-                <div class="contenedor-tabla d-flex table-responsive ">
+                <div class="contenedor-tabla d-flex table-responsive flamingo-scrollbar mb-3">
                     <table class="table border fs-12px" #tablaVentas>
                         <thead>
                         <tr>
                           <th scope="col">Aliado</th>
-                          <th scope="col"># Order</th>
-                          <th scope="col">Fecha creación order</th>
-                          <th scope="col">Producto</th>
+                          <th scope="col" style="min-width: 70px;"># Order</th>
+                          <th scope="col" style="min-width: 155px;">Fecha creación order</th>
+                          <th scope="col" style="min-width: 250px;">Producto</th>
                           <th scope="col">Categoría</th>
-                          <th scope="col">Valor flete</th>
+                          <th scope="col" style="min-width: 100px;">Valor flete</th>
                           <th scope="col">Valor</th>
                           <th scope="col">Asesor</th>
                           <th scope="col">Correo electrónico</th>
+                          <th scope="col" style="min-width: 155px;">Nombre del cliente</th>
+                          <th scope="col" style="min-width: 155px;">Apellido del cliente</th>
+                          <th scope="col" style="min-width: 170px;">Documento del cliente</th>
+                          <th scope="col" style="min-width: 120px;">Medio de pago</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -225,6 +230,15 @@
                                 <td scope="col">{{venta.valorTotal}}</td>
                                 <td scope="col">{{venta.asesorTrafico}}</td>
                                 <td scope="col">{{venta.correos}}</td>
+                                <td scope="col">{{venta.nombreCliente}}</td>
+                                <td scope="col">{{venta.apellidoCliente}}</td>
+                                <td scope="col">{{venta.documentoCliente}}</td>
+                                <td scope="col">{{venta.medioPago}}</td>
+                            </tr>
+                            <tr *ngIf="ventas.length === 0">
+                                <td class="text-gray text-center" colspan="13">
+                                    No se encontraron registros con estos filtros.
+                                </td>
                             </tr>
                         </tbody>
                     </table>
