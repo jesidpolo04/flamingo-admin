@@ -32,6 +32,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
     private servicioCategorias: CategoriasService
   ) {
     this.formulario = new FormGroup({
+      subcategoria: new FormControl('', [Validators.required]),
       categoria: new FormControl('', [Validators.required]),
       imagen: new FormControl('', [Validators.required]),
       recursoImagen: new FormControl('', [Validators.required]),
@@ -87,6 +88,7 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
   public limpiarFormulario(): void {
     this.formulario.reset()
     this.formulario.controls['categoria'].setValue('');
+    this.formulario.controls['subcategoria'].setValue('');
     this.formulario.controls['destacada'].setValue(false)
   }
 
@@ -113,10 +115,9 @@ export class ModalGestionCategoriasAliadoComponent implements OnInit {
       this.marcarFormularioComoSucio()
       return;
     }
-    console.log(this.formulario.controls['destacada'].value)
     this.servicioAliados.asignarCategoria(new PeticionAsignarCategorias(
       this.formulario.controls['recursoImagen'].value,
-      this.formulario.controls['categoria'].value,
+      this.formulario.controls['subcategoria'].value,
       this.aliado!.id,
       this.formulario.controls['enlaceAmigable'].value,
       this.formulario.controls['destacada'].value,
