@@ -48,7 +48,7 @@
                         <div class="col-6">
                             <fieldset>
                                 <label for="">Nombre de la subcategoría</label>
-                                <select class="form-select" name="" formControlName="categoria" aria-placeholder="Seleccionar">
+                                <select class="form-select" name="" formControlName="subcategoria" aria-placeholder="Seleccionar">
                                     <option value="" selected disabled>Seleccionar ...</option>
                                     <option *ngFor="let categoria of this.categorias" [value]="categoria.id">{{categoria.nombre}}</option>
                                 </select>
