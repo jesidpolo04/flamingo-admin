@@ -9,6 +9,9 @@ import { TraficoClientesComponent } from './administrador/componentes/paginas/tr
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
 import { AutenticacionGuard } from './guards/autenticacion.guard';
+import { PaginaGestionBannersComponent } from './banners/componentes/pagina-gestion-banners/pagina-gestion-banners.component';
+import { PaginaGestionProductosComponent } from './productos/componentes/pagina-gestion-productos/pagina-gestion-productos.component';
+import { PaginaConfiguracionesComponent } from './configuraciones/componentes/pagina-configuraciones/pagina-configuraciones.component';
 
 const routes: Routes = [
   {
@@ -43,6 +46,18 @@ const routes: Routes = [
       {
         path: 'administradores',
         component: GestionDeUsuariosComponent
+      },
+      {
+        path: 'banners',
+        component: PaginaGestionBannersComponent
+      },
+      {
+        path: 'productos',
+        component: PaginaGestionProductosComponent
+      },
+      {
+        path: 'configuraciones',
+        component: PaginaConfiguracionesComponent
       }
     ],
     canActivate: [AutenticacionGuard]

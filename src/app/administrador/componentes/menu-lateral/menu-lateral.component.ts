@@ -38,6 +38,18 @@ export class MenuLateralComponent implements OnInit {
         {
           nombre: 'Administradores',
           ruta: '/administrar/administradores'
+        },
+        {
+          nombre: 'Productos',
+          ruta: '/administrar/productos'
+        },
+        {
+          nombre: 'Banners',
+          ruta: '/administrar/banners'
+        },
+        {
+          nombre: 'Configurar',
+          ruta: '/administrar/configuraciones'
         }
       ]
     }
