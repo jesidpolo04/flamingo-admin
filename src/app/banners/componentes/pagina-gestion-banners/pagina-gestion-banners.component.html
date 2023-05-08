@@ -1,0 +1,33 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Banner principal</span>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="formulario" class="mb-4">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Imagen</label>
+                                <app-input-archivo formControlName="imagen"></app-input-archivo>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Aliado</label>
+                                <select formControlName="aliado" class="form-select" name="" id="">
+                                    <option [value]="aliado.id" *ngFor="let aliado of aliados">{{aliado.nombre}}</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex">
+                    <button class="boton-flamingo rojo relleno ms-auto" (click)="guardarBannerPrincipal()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popup #popup></app-popup>

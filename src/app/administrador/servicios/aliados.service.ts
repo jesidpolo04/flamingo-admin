@@ -41,6 +41,16 @@ export class AliadosService extends Autenticable {
     formulario.append('linkAmigable',  aliado.linkAmigable)
     formulario.append('logo', aliado.logo)
     formulario.append('tiempo', aliado.tiempo.toString())
+    formulario.append('imgModal', aliado.imgModal.toString())
+    aliado.servicios ? formulario.append('servicios', aliado.servicios) : null;
+    aliado.quienesSomos ? formulario.append('quienesSomos', aliado.quienesSomos) : null;
+    aliado.linea ? formulario.append('linea', aliado.linea) : null;
+    aliado.whatsapp ? formulario.append('whatsapp', aliado.whatsapp) : null;
+    aliado.imgEscritorio ? formulario.append('imgEscritorio', aliado.imgEscritorio) : null;
+    aliado.imgMobil ? formulario.append('imgMobile', aliado.imgMobil) : null;
+
+    
+    formulario.append('transaccional', aliado.transaccional.toString()) 
 
     return this.clienteHttp.post<any>(
       `${this.urlBackend}${endpoint}`, 
@@ -64,7 +74,7 @@ export class AliadosService extends Autenticable {
       let valor = aliado[key as keyof PeticionActualizarAliado];
       if(valor != '' && valor){
         console.log(key, valor)
-          if(typeof(valor) == 'number'){
+          if(typeof(valor) == 'number' || typeof(valor) == 'boolean'){
             formulario.append(key, valor.toString())
           }else{
             formulario.append(key, valor)
