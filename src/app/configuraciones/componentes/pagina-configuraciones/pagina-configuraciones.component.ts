@@ -13,6 +13,8 @@ export class PaginaConfiguracionesComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   formularioImagenDesktop: FormGroup
   formularioImagenMobile: FormGroup
+  vitrinaActiva: boolean = false 
+  bannerPrincipalActivo: boolean = false
 
   constructor(private servicio: ConfiguracionesService) { 
     this.formularioImagenDesktop = new FormGroup({
@@ -25,6 +27,7 @@ export class PaginaConfiguracionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerEstadosVitrinaYBannerPrincipal()
   }
 
   guardarImagenDesktop(){
@@ -57,6 +60,38 @@ export class PaginaConfiguracionesComponent implements OnInit {
         this.popup.abrirPopupFallido('Error', 'Algo salió mal durante la actualización de la imagen.')
       }
     })
+  }
+
+  obtenerEstadosVitrinaYBannerPrincipal(){
+    this.servicio.obtenerConfiguracionVitrinaYBannerPrincipal().subscribe({
+      next: (respuesta)=>{
+        this.bannerPrincipalActivo = respuesta.banner
+        this.vitrinaActiva = respuesta.vitrina
+      }
+    })
+  }
+
+  cambiarEstadoVitrina(){
+    this.servicio.cambiarEstadoVitrina().subscribe({
+      next: ()=>{
+        this.popup.abrirPopupExitoso("Guardado con éxito.")
+      },
+      error: ()=>{
+        this.popup.abrirPopupFallido("Error.", "Algo salió mal al momento de actualizar.")
+      }
+    })
+  }
+
+  cambiarEstadoBannerPrincipal(){
+    this.servicio.cambiarEstadoBannerPrincipal().subscribe({
+      next: ()=>{
+        this.popup.abrirPopupExitoso("Guardado con éxito.")
+      },
+      error: ()=>{
+        this.popup.abrirPopupFallido("Error.", "Algo salió mal al momento de actualizar.")
+      }
+    })
+
   }
 
 }

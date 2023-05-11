@@ -29,11 +29,11 @@ export class ModalCreacionAliadoComponent implements OnInit {
       recursoLogo: new FormControl('', [Validators.required]),
       tiempo: new FormControl('', [Validators.required]),
       quienesSomos: new FormControl<string | undefined>(''),
-      transaccional: new FormControl<boolean>(false),
+      transaccional: new FormControl<boolean>(false, []),
       servicios: new FormControl<string | undefined>(''),
       linea: new FormControl<string | undefined>(''),
       whatsapp: new FormControl<string | undefined>(''),
-      imagenPersonalizada: new FormControl<boolean>(false),
+      imagenPersonalizada: new FormControl<boolean>(false , []),
       imagenDesktop: new FormControl<File | undefined>(undefined),
       imagenMobile: new FormControl<File | undefined>(undefined),
     })
@@ -80,12 +80,12 @@ export class ModalCreacionAliadoComponent implements OnInit {
         this.formulario.controls['enlaceAmigable'].value,
         this.formulario.controls['recursoLogo'].value,
         this.formulario.controls['tiempo'].value,
-        this.formulario.controls['transaccional'].value,
+        this.formulario.controls['transaccional'].value ?? false,
         this.formulario.controls['servicios'].value,
         this.formulario.controls['quienesSomos'].value,
         this.formulario.controls['linea'].value,
         this.formulario.controls['whatsapp'].value,
-        this.formulario.controls['imagenPersonalizada'].value,
+        this.formulario.controls['imagenPersonalizada'].value ?? false,
         this.formulario.controls['imagenDesktop'].value,
         this.formulario.controls['imagenMobile'].value
       )).subscribe((respuesta:any)=>{

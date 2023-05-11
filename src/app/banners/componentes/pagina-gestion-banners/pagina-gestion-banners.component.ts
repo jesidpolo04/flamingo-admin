@@ -18,6 +18,7 @@ export class PaginaGestionBannersComponent implements OnInit {
   constructor(private servicioAliados: AliadosService, private servicioBanners: BannersService) { 
     this.formulario = new FormGroup({
       imagen: new FormControl<File | undefined>(undefined),
+      imagenMobile: new FormControl<File | undefined>(undefined),
       aliado: new FormControl<string | undefined>(undefined)
     })
   }
@@ -42,7 +43,8 @@ export class PaginaGestionBannersComponent implements OnInit {
     const controls = this.formulario.controls
     this.servicioBanners.guardarBannerPrincipal(
       controls['aliado'].value,
-      controls['imagen'].value
+      controls['imagen'].value,
+      controls['imagenMobile'].value
     ).subscribe({
       next: ()=>{
         this.popup.abrirPopupExitoso('Se ha guardado el banner con éxito.')
