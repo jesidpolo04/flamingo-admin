@@ -9,22 +9,46 @@
                     <div class="row">
                         <div class="col">
                             <fieldset>
-                                <label for="">Imagen (Desktop)</label>
+                                <label for="">Imagen (Desktop) <span class="validacion">*</span></label>
                                 <app-input-archivo formControlName="imagen" [nombre]="'imagen'"></app-input-archivo>
+                                <app-validacion 
+                                [control]="this.formulario.controls['imagen']"
+                                [validacion]="'required'"
+                                [texto]="'La imagen para escritorio es necesaria.'"></app-validacion>
                             </fieldset>
                         </div>
                         <div class="col">
                             <fieldset>
-                                <label for="">Imagen (Mobile)</label>
+                                <label for="">Imagen (Mobile) <span class="validacion">*</span></label>
                                 <app-input-archivo formControlName="imagenMobile" [nombre]="'imagenMobile'"></app-input-archivo>
+                                <app-validacion 
+                                [control]="this.formulario.controls['imagenMobile']"
+                                [validacion]="'required'"
+                                [texto]="'La imagen para movil es necesaria.'"></app-validacion>
                             </fieldset>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col">
                             <fieldset>
-                                <label for="">Aliado</label>
+                                <label for="">Aliado <span class="validacion">*</span></label>
                                 <select formControlName="aliado" class="form-select" name="" id="">
                                     <option [value]="aliado.id" *ngFor="let aliado of aliados">{{aliado.nombre}}</option>
                                 </select>
+                                <app-validacion 
+                                [control]="this.formulario.controls['aliado']"
+                                [validacion]="'required'"
+                                [texto]="'El aliado es obligatorio.'"></app-validacion>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Link amigable <span class="validacion">*</span></label>
+                                <input formControlName="linkAmigable" class="form-control"/>
+                                <app-validacion 
+                                [control]="this.formulario.controls['linkAmigable']"
+                                [validacion]="'required'"
+                                [texto]="'El link es obligatorio.'"></app-validacion>
                             </fieldset>
                         </div>
                     </div>
