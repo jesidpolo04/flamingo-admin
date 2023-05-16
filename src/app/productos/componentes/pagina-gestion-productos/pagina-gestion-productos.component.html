@@ -19,12 +19,12 @@
                     <div class="d-flex">
                         <div>
                             <span class="texto-gris fs-12px fw-bolder">Total: </span>
-                            <span class="texto-naranja fs-12px fw-bold"> 10 </span>
+                            <span class="texto-naranja fs-12px fw-bold"> {{ totalRegistros }} </span>
                         </div>
                         <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
                             <span class="texto-gris fs-12px fw-bold d-flex align-items-center">Ver</span>
                             <span class="texto-gris fs-12px fw-bold align-items-center">
-                                <select #porPagina class="form-select sm" name="" id="">
+                                <select #porPagina class="form-select sm" [(ngModel)]="limite" (change)="obtenerProductos()">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
@@ -38,7 +38,7 @@
                         <table class="table border fs-12px">
                             <thead>
                             <tr>
-                              <th scope="col">Nombre producto</th>
+                              <th width="140px" scope="col">Nombre producto</th>
                               <th scope="col">Aliado</th>
                               <th scope="col">Activo</th>
                               <th scope="col" colspan="2">Enlace amigable</th>
@@ -48,7 +48,7 @@
                             <tbody>
                                 <tr *ngFor="let producto of productos; let index = index">
                                 <td>{{ producto.nombre }}</td>
-                                <td>{{ producto.idAliado }}</td>
+                                <td>{{ producto.nombreAliado }}</td>
                                 <td>
                                     <label class="switch">
                                         <input type="checkbox" [checked]="producto.estado" (change)="cambiarEstadoProducto(producto.id)">
@@ -58,7 +58,7 @@
                                     <label class="ms-1 fw-semibold fs-12px" *ngIf="!producto.estado">No</label>
                                 </td>
                                 <td>{{ producto.linkAmigable }}</td>
-                                <td><span class="copiar-portapapeles"></span></td>
+                                <td><span class="copiar-portapapeles" (click)="copiarAlPortapapeles(producto.linkAmigable)"></span></td>
                                 <td><span class="texto-rojo fw-bolder cursor-pointer" (click)="abrirModalActualizar(producto)">Editar</span></td>
                                 </tr>
                             </tbody>
@@ -67,7 +67,7 @@
                     <div class="d-flex">
                         <div class="ms-auto">
                             <ngb-pagination
-                            [collectionSize]="10" [page]="1" [pageSize]="5">
+                            [collectionSize]="totalRegistros" [(page)]="pagina" [pageSize]="limite" (pageChange)="obtenerProductos()">
                             </ngb-pagination>
                         </div>
                     </div>

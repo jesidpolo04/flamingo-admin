@@ -14,6 +14,32 @@ export class ConfiguracionesService extends Autenticable {
     this.urlBackend = environment.urlBackend
   }
 
+  obtenerConfiguracionVitrinaYBannerPrincipal(){
+    const endpoint = `/api/v1/configuraciones/vitrina-banner-principal`
+    return this.clienteHttp.get<{vitrina: boolean, banner: boolean}>(
+      `${this.urlBackend}${endpoint}`,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion() }` }} 
+    )
+  }
+
+  cambiarEstadoVitrina(){
+    const endpoint = `/api/v1/configuraciones/vitrina`
+    return this.clienteHttp.put(
+      `${this.urlBackend}${endpoint}`, 
+      undefined,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion() }` }} 
+    )
+  }
+
+  cambiarEstadoBannerPrincipal(){
+    const endpoint = `/api/v1/configuraciones/banner-principal`
+    return this.clienteHttp.put(
+      `${this.urlBackend}${endpoint}`, 
+      undefined,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion() }` }} 
+    )
+  }
+
   guardarImagenModalRedireccionDesktop(imagen: File){
     const endpoint = `/api/v1/configuraciones/imagen-modal-desktop`
     const formData = new FormData()

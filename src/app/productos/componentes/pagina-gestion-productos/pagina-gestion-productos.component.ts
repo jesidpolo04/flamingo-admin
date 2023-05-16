@@ -15,7 +15,10 @@ export class PaginaGestionProductosComponent implements OnInit {
   @ViewChild('modalCrear') modalCrear!: ModalCrearProductoComponent
   @ViewChild('modalActualizar') modalActualizar!: ModalActualizarProductoComponent
 
-  productos:Producto[] = []
+  productos: Producto[] = []
+  pagina: number = 1
+  limite: number = 5
+  totalRegistros: number = 0
 
   constructor(private servicioProductos: ProductosService) { }
 
@@ -32,9 +35,10 @@ export class PaginaGestionProductosComponent implements OnInit {
   }
 
   obtenerProductos(){
-    this.servicioProductos.obtenerProductos(false).subscribe({
+    this.servicioProductos.obtenerProductos(this.pagina, this.limite, false).subscribe({
       next: ( respuesta )=>{
         this.productos = respuesta.productos
+        this.totalRegistros = respuesta.paginacion.totalRegistros
       }
     })
   }
@@ -47,4 +51,8 @@ export class PaginaGestionProductosComponent implements OnInit {
     this.modalActualizar.abrir(producto)
   }
 
+  copiarAlPortapapeles(texto:string){
+    navigator.clipboard.writeText(texto)
+    this.popup.abrirPopupExitoso('Copiado al portapapeles')
+  }
 }

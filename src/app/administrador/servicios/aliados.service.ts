@@ -31,6 +31,7 @@ export class AliadosService extends Autenticable {
   }
 
   public crearAliado(aliado:PeticionCrearAliado):Observable<any>{
+    console.log(aliado)
     const endpoint = `/api/v1/aliados?esAdministrador=true`
     const formulario = new FormData()
 
