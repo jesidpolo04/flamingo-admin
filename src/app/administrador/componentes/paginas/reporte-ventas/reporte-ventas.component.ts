@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {  Chart } from 'chart.js';
+import {  Chart, CategoryScale } from 'chart.js';
 import { Aliado } from 'src/app/administrador/modelos/aliados/Aliado';
 import { CriteriosBusquedaVentas } from 'src/app/administrador/modelos/ventas/CriteriosBusquedaVentas';
 import { TotalVentas } from 'src/app/administrador/modelos/ventas/TotalVentas';
@@ -39,6 +39,7 @@ export class ReporteVentasComponent implements OnInit, AfterViewInit {
 
   public constructor(private servicioAliados:AliadosService, private servicioVentas:VentasService, private servicioCabecera:CabeceraService) {
     this.servicioCabecera.actualizarTitulo('Consulta de reporte de ventas')
+    Chart.register(CategoryScale)
     const hoy = new Date()
     this.formulario = new FormGroup({
       fechaInicial: new FormControl(`${hoy.getFullYear()}-${hoy.getMonth() + 1}-${hoy.getDate()}`),

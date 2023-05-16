@@ -65,8 +65,8 @@ export class ProductosService extends Autenticable {
     )
   }
 
-  obtenerProductos(soloActivos: boolean = true){
-    const endpoint = `/api/v1/productos?soloActivos=${soloActivos}`
+  obtenerProductos(pagina: number = 1, limite: number = 5, soloActivos: boolean = true){
+    const endpoint = `/api/v1/productos?soloActivos=${soloActivos}&pagina=${pagina}&limite=${limite}`
     return this.clienteHttp.get<{paginacion:Paginacion, productos: Producto[]}>(
         `${this.urlBackend}${endpoint}`,
         {headers: {Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} }

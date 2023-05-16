@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Autenticable } from 'src/app/administrador/servicios/compartido/Autenticable';
 import { environment } from 'src/environments/environment';
+import { Banner } from '../modelos/Banner';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,14 @@ export class BannersService extends Autenticable {
   constructor(private clienteHttp:HttpClient) { 
     super()
     this.urlBackend = environment.urlBackend
+  }
+
+  public obtenerBannerPrincipal(){
+    const endpoint = '/api/v1/banners/obtener'
+    return this.clienteHttp.get<{bannerDesktop: Banner, bannerMobile: Banner}>(
+      `${this.urlBackend}${endpoint}`,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion() }` }}
+    )
   }
 
   public guardarBannerPrincipal(idAliado: string, imagen: File, imagenMobile: File, linkAmigable: string){

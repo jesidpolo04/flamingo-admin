@@ -27,12 +27,23 @@ export class PaginaGestionBannersComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerAliados()
+    this.cargarBanner()
   }
 
   obtenerAliados(){
     this.servicioAliados.obtenerAliados().subscribe({
       next: ( respuesta ) => {
         this.aliados = respuesta.aliados
+      }
+    })
+  }
+
+  cargarBanner(){
+    this.servicioBanners.obtenerBannerPrincipal().subscribe({
+      next: (banners)=>{
+        const controls = this.formulario.controls
+        controls['aliado'].setValue(banners.bannerDesktop.idAliado)
+        controls['linkAmigable'].setValue(banners.bannerDesktop.linkAmigable)
       }
     })
   }
