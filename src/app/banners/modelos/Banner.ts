@@ -3,5 +3,5 @@ export interface Banner{
     linkMarcacion: string
     linkAmigable: string
     idAliado: string
-    imagen: string
+    imagen: string | null
 }

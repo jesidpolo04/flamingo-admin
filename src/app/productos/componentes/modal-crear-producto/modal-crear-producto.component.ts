@@ -43,6 +43,7 @@ export class ModalCrearProductoComponent implements OnInit {
       imagen: controls['imagen'].value,
     }).subscribe({
       next: ( respuesta )=>{
+        this.cerrar()
         this.popup.abrirPopupExitoso('Se ha creado el producto con éxito.')
       },
       error: ( error: HttpErrorResponse ) => {
@@ -64,6 +65,10 @@ export class ModalCrearProductoComponent implements OnInit {
     this.servicioModal.open(this.modal, {
       size: 'xl'
     })
+  }
+
+  cerrar(){
+    this.servicioModal.dismissAll()
   }
 
 }
