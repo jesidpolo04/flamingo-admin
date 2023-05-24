@@ -50,6 +50,11 @@ export class ModalActualizarProductoComponent implements OnInit {
     })
   }
 
+  cerrar(){
+    this.servicioModal.dismissAll()
+  }
+
+
   limpiarFormulario(){
     this.formulario.reset()
   }
@@ -75,6 +80,7 @@ export class ModalActualizarProductoComponent implements OnInit {
       imagen: controls['imagen'].value,
     }, this.producto!.id).subscribe({
       next: ( respuesta )=>{
+        this.cerrar()
         this.popup.abrirPopupExitoso('Se ha actualizado el producto con éxito.')
       },
       error: ( error: HttpErrorResponse ) => {

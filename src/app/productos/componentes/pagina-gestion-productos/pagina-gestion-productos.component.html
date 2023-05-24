@@ -38,10 +38,10 @@
                         <table class="table border fs-12px">
                             <thead>
                             <tr>
-                              <th width="140px" scope="col">Nombre producto</th>
+                              <th width="160px" scope="col">Nombre producto</th>
                               <th scope="col">Aliado</th>
                               <th scope="col">Activo</th>
-                              <th scope="col" colspan="2">Enlace amigable</th>
+                              <th scope="col" colspan="1">Enlace amigable</th>
                               <th scope="col" colspan="1">Acciones</th>
                             </tr>
                             </thead>
@@ -58,7 +58,6 @@
                                     <label class="ms-1 fw-semibold fs-12px" *ngIf="!producto.estado">No</label>
                                 </td>
                                 <td>{{ producto.linkAmigable }}</td>
-                                <td><span class="copiar-portapapeles" (click)="copiarAlPortapapeles(producto.linkAmigable)"></span></td>
                                 <td><span class="texto-rojo fw-bolder cursor-pointer" (click)="abrirModalActualizar(producto)">Editar</span></td>
                                 </tr>
                             </tbody>

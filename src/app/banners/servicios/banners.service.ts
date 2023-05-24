@@ -23,12 +23,12 @@ export class BannersService extends Autenticable {
     )
   }
 
-  public guardarBannerPrincipal(idAliado: string, imagen: File, imagenMobile: File, linkAmigable: string){
+  public guardarBannerPrincipal(idAliado: string, linkAmigable: string, imagen?: File, imagenMobile?: File){
     const endpoint = `/api/v1/banners`
     const formData = new FormData()
-    formData.append('imagen', imagen)
+    imagen ? formData.append('imagen', imagen) : undefined;
+    imagenMobile ? formData.append('imagenMobile', imagenMobile) : undefined;
     formData.append('idAliado', idAliado)
-    formData.append('imagenMobile', imagenMobile)
     formData.append('linkAmigable', linkAmigable)
     return this.clienteHttp.post(
       `${this.urlBackend}${endpoint}`,
