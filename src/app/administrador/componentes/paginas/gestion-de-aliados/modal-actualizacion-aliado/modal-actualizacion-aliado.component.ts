@@ -38,6 +38,8 @@ export class ModalActualizacionAliadoComponent implements OnInit {
       imagenPersonalizada: new FormControl<boolean>(false),
       imagenDesktop: new FormControl<File | undefined>(undefined),
       imagenMobile: new FormControl<File | undefined>(undefined),
+      elfiao: new FormControl<boolean>(false),
+      mefia: new FormControl<boolean>(false)
     })
   }
 
@@ -75,9 +77,12 @@ export class ModalActualizacionAliadoComponent implements OnInit {
     this.formulario.controls['linea'].setValue(aliado.linea)
     this.formulario.controls['whatsapp'].setValue(aliado.whatsapp)
     this.formulario.controls['imagenPersonalizada'].setValue(aliado.imgModal)
+    this.formulario.controls['elfiao'].setValue(aliado.fiao)
+    this.formulario.controls['mefia'].setValue(aliado.mefia)
   }
 
   public actualizarAliado(){
+    console.log(this.formulario.controls)
     this.servicioAliados.actualizarAliado(this.aliado!.id, new PeticionActualizarAliado(
       this.formulario.controls['orden'].value,
       this.formulario.controls['nombre'].value,
@@ -93,14 +98,19 @@ export class ModalActualizacionAliadoComponent implements OnInit {
       this.formulario.controls['whatsapp'].value,
       this.formulario.controls['imagenPersonalizada'].value,
       this.formulario.controls['imagenDesktop'].value,
-      this.formulario.controls['imagenMobile'].value
-    )).subscribe(respuesta =>{
-      this.seHaActualizadoUnAliado.emit()
-      this.limpiarFormulario()
-      this.cerrar()
-      this.popup.abrirPopupExitoso('Guardado con éxito')
-    }, (error:HttpErrorResponse)=>{
-      this.popup.abrirPopupFallido('Error')
+      this.formulario.controls['imagenMobile'].value,
+      this.formulario.controls['elfiao'].value,
+      this.formulario.controls['mefia'].value
+    )).subscribe({
+      next: () =>{
+        this.seHaActualizadoUnAliado.emit()
+        this.limpiarFormulario()
+        this.cerrar()
+        this.popup.abrirPopupExitoso('Guardado con éxito')
+      },
+      error: (error:HttpErrorResponse)=>{
+        this.popup.abrirPopupFallido('Error', error.error.mensaje)
+      }
     })
   }
 

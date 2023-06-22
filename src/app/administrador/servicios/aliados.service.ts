@@ -49,7 +49,8 @@ export class AliadosService extends Autenticable {
     aliado.whatsapp ? formulario.append('whatsapp', aliado.whatsapp) : null;
     aliado.imgEscritorio ? formulario.append('imgEscritorio', aliado.imgEscritorio) : null;
     aliado.imgMobil ? formulario.append('imgMobile', aliado.imgMobil) : null;
-
+    aliado.mefia ? formulario.append('mefia', 'true') : formulario.append('mefia', 'false')
+    aliado.fiao ? formulario.append('fiao', 'true') : formulario.append('fiao', 'false')
     
     formulario.append('transaccional', aliado.transaccional.toString()) 
 
@@ -70,11 +71,10 @@ export class AliadosService extends Autenticable {
   public actualizarAliado(id:string, aliado:PeticionActualizarAliado):Observable<any>{
     const endpoint = `/api/v1/aliados/${id}?esAdministrador=true`
     const formulario = new FormData()
-    console.log(aliado)
+    console.log('peticion actualizar', aliado)
     for (const key in aliado) {
       let valor = aliado[key as keyof PeticionActualizarAliado];
-      if(valor != '' && valor){
-        console.log(key, valor)
+      if(valor !== '' && valor !== undefined && valor !== null){
           if(typeof(valor) == 'number' || typeof(valor) == 'boolean'){
             formulario.append(key, valor.toString())
           }else{
