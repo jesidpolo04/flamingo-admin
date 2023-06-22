@@ -21,4 +21,6 @@ export interface Aliado{
     imgModal: boolean,
     imgEscritorio?: string
     imgMobil?: string
+    fiao: boolean
+    mefia: boolean
 }

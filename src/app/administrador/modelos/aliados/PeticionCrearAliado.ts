@@ -14,6 +14,8 @@ export class PeticionCrearAliado{
     public imgModal: boolean
     public imgEscritorio?: File
     public imgMobil?: File
+    public fiao: boolean
+    public mefia: boolean
 
     public constructor(
         orden:number = 1, 
@@ -30,7 +32,9 @@ export class PeticionCrearAliado{
         whatsapp?: string,
         imgModal: boolean = false,
         imgEscritorio?: File,
-        imgMobil?: File
+        imgMobil?: File,
+        fiao = false,
+        mefia = false
     ){
         this.orden = orden
         this.nombre = nombre
@@ -47,5 +51,7 @@ export class PeticionCrearAliado{
         this.imgModal = imgModal
         this.imgEscritorio = imgEscritorio
         this.imgMobil = imgMobil
+        this.mefia = mefia
+        this.fiao = fiao
     }
 }

@@ -36,6 +36,8 @@ export class ModalCreacionAliadoComponent implements OnInit {
       imagenPersonalizada: new FormControl<boolean>(false , []),
       imagenDesktop: new FormControl<File | undefined>(undefined),
       imagenMobile: new FormControl<File | undefined>(undefined),
+      mefia: new FormControl<boolean>(false),
+      elfiao: new FormControl<boolean>(false),
     })
   }
 
@@ -87,14 +89,19 @@ export class ModalCreacionAliadoComponent implements OnInit {
         this.formulario.controls['whatsapp'].value,
         this.formulario.controls['imagenPersonalizada'].value ?? false,
         this.formulario.controls['imagenDesktop'].value,
-        this.formulario.controls['imagenMobile'].value
-      )).subscribe((respuesta:any)=>{
-        this.seHaCreadoUnAliado.emit()
-        this.popup.abrirPopupExitoso('Aliado creado con éxito', 'Nombre', this.formulario.controls['nombre'].value)
-        this.limpiarFormulario()
-        this.cerrar();
-      }, (error:HttpErrorResponse)=>{
-        this.popup.abrirPopupFallido('Error')
+        this.formulario.controls['imagenMobile'].value,
+        this.formulario.controls['elfiao'].value,
+        this.formulario.controls['mefia'].value
+      )).subscribe({
+        next: ()=>{
+          this.seHaCreadoUnAliado.emit()
+          this.popup.abrirPopupExitoso('Aliado creado con éxito', 'Nombre', this.formulario.controls['nombre'].value)
+          this.limpiarFormulario()
+          this.cerrar();
+        },
+        error: (error:HttpErrorResponse)=>{
+          this.popup.abrirPopupFallido('Error', error.error.mensaje)
+        }
       })
     }
   }
