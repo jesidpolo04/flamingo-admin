@@ -12,4 +12,8 @@ export interface Venta {
     productos: string
     asesorTrafico: string
     comision: number
+    nombreCliente: string
+    apellidoCliente: string
+    documentoCliente: string
+    medioPago?: string
 }

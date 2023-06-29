@@ -1,0 +1,77 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Banner principal</span>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="formulario" class="mb-4">
+                    <!-- imagen dektop -->
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Imagen (Escritorio)</label>
+                                <app-input-archivo formControlName="imagen" [nombre]="'imagen'"></app-input-archivo>
+                                <app-validacion 
+                                [control]="this.formulario.controls['imagen']"
+                                [validacion]="'required'"
+                                [texto]="'La imagen para escritorio es necesaria.'"></app-validacion>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <div class="w-100 h-100 d-flex justify-content-start align-items-center" *ngIf="banners && banners.bannerDesktop && banners.bannerDesktop.imagen">
+                                <img [src]="banners.bannerDesktop.imagen" height="60px">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- imagen mobile -->
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Imagen (Móvil)</label>
+                                <app-input-archivo formControlName="imagenMobile" [nombre]="'imagenMobile'"></app-input-archivo>
+                                <app-validacion 
+                                [control]="this.formulario.controls['imagenMobile']"
+                                [validacion]="'required'"
+                                [texto]="'La imagen para móvil es necesaria.'"></app-validacion>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <div class="w-100 h-100 d-flex justify-content-start align-items-center" *ngIf="banners && banners.bannerMobile && banners.bannerMobile.imagen">
+                                <img [src]="banners.bannerMobile.imagen" height="60px">
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Aliado <span class="validacion">*</span></label>
+                                <select formControlName="aliado" class="form-select" name="" id="">
+                                    <option [value]="aliado.id" *ngFor="let aliado of aliados">{{aliado.nombre}}</option>
+                                </select>
+                                <app-validacion 
+                                [control]="this.formulario.controls['aliado']"
+                                [validacion]="'required'"
+                                [texto]="'El aliado es obligatorio.'"></app-validacion>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Link amigable <span class="validacion">*</span></label>
+                                <input formControlName="linkAmigable" class="form-control"/>
+                                <app-validacion 
+                                [control]="this.formulario.controls['linkAmigable']"
+                                [validacion]="'required'"
+                                [texto]="'El link es obligatorio.'"></app-validacion>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex">
+                    <button class="boton-flamingo rojo relleno ms-auto" (click)="guardarBannerPrincipal()">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popup #popup></app-popup>

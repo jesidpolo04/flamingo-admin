@@ -25,6 +25,11 @@ import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usu
 import { ModalCreacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-creacion-usuario/modal-creacion-usuario.component';
 import { ModalActualizacionUsuarioComponent } from './componentes/paginas/gestion-de-usuarios/modal-actualizacion-usuario/modal-actualizacion-usuario.component';
 import { SeccionDeMenuComponent } from './componentes/menu-lateral/seccion-de-menu/seccion-de-menu.component';
+import { BannersModule } from '../banners/banners.module';
+import { ProductosModule } from '../productos/productos.module';
+import { AlertasModule } from '../alertas/alertas.module';
+import { InputsModule } from '../inputs/inputs.module';
+import { ConfiguracionesModule } from '../configuraciones/configuraciones.module';
 
 
 
@@ -57,7 +62,11 @@ import { SeccionDeMenuComponent } from './componentes/menu-lateral/seccion-de-me
     FormsModule,
     NgbModule,
     NgChartsModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    InputsModule,
+    BannersModule,
+    ProductosModule,
+    ConfiguracionesModule
   ]
 })
 export class AdministradorModule { }

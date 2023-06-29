@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PeticionCrearAliado } from 'src/app/administrador/modelos/aliados/PeticionCrearAliado';
@@ -28,6 +28,16 @@ export class ModalCreacionAliadoComponent implements OnInit {
       logo: new FormControl('', [Validators.required]),
       recursoLogo: new FormControl('', [Validators.required]),
       tiempo: new FormControl('', [Validators.required]),
+      quienesSomos: new FormControl<string | undefined>(''),
+      transaccional: new FormControl<boolean>(false, []),
+      servicios: new FormControl<string | undefined>(''),
+      linea: new FormControl<string | undefined>(''),
+      whatsapp: new FormControl<string | undefined>(''),
+      imagenPersonalizada: new FormControl<boolean>(false , []),
+      imagenDesktop: new FormControl<File | undefined>(undefined),
+      imagenMobile: new FormControl<File | undefined>(undefined),
+      mefia: new FormControl<boolean>(false),
+      elfiao: new FormControl<boolean>(false),
     })
   }
 
@@ -72,13 +82,26 @@ export class ModalCreacionAliadoComponent implements OnInit {
         this.formulario.controls['enlaceAmigable'].value,
         this.formulario.controls['recursoLogo'].value,
         this.formulario.controls['tiempo'].value,
-      )).subscribe((respuesta:any)=>{
-        this.seHaCreadoUnAliado.emit()
-        this.popup.abrirPopupExitoso('Aliado creado con éxito', 'Nombre', this.formulario.controls['nombre'].value)
-        this.limpiarFormulario()
-        this.cerrar();
-      }, (error:HttpErrorResponse)=>{
-        this.popup.abrirPopupFallido('Error')
+        this.formulario.controls['transaccional'].value ?? false,
+        this.formulario.controls['servicios'].value,
+        this.formulario.controls['quienesSomos'].value,
+        this.formulario.controls['linea'].value,
+        this.formulario.controls['whatsapp'].value,
+        this.formulario.controls['imagenPersonalizada'].value ?? false,
+        this.formulario.controls['imagenDesktop'].value,
+        this.formulario.controls['imagenMobile'].value,
+        this.formulario.controls['elfiao'].value,
+        this.formulario.controls['mefia'].value
+      )).subscribe({
+        next: ()=>{
+          this.seHaCreadoUnAliado.emit()
+          this.popup.abrirPopupExitoso('Aliado creado con éxito', 'Nombre', this.formulario.controls['nombre'].value)
+          this.limpiarFormulario()
+          this.cerrar();
+        },
+        error: (error:HttpErrorResponse)=>{
+          this.popup.abrirPopupFallido('Error', error.error.mensaje)
+        }
       })
     }
   }

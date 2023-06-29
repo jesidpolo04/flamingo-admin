@@ -1,0 +1,88 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Banner principal y vitrina de productos</span>
+            </div>
+            <div class="card-body">
+                <form class="mb-4">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">¿Activar vitrina de productos?</label>
+                                <div class="mt-2 ms-3">
+                                    <label class="switch">
+                                        <input name="vitrina" [(ngModel)]="vitrinaActiva" type="checkbox" [checked]="vitrinaActiva" (change)="cambiarEstadoVitrina()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col">
+                            <fieldset>
+                                <label for="">¿Activar banner principal?</label>
+                                <div class="mt-2 ms-3">
+                                    <label class="switch">
+                                        <input name="banner" [(ngModel)]="bannerPrincipalActivo" type="checkbox" [checked]="bannerPrincipalActivo" (change)="cambiarEstadoBannerPrincipal()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Imagen modal redirección (Desktop)</span>
+            </div>
+            <div class="card-body">
+                <form class="mb-4" [formGroup]="formularioImagenDesktop">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Imagen</label>
+                                <app-input-archivo formControlName="imagenDesktop" nombre="imagenDesktop"></app-input-archivo>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex">
+                    <button class="boton-flamingo rojo relleno ms-auto" (click)="guardarImagenDesktop()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fw-semibold fs-14px texto-naranja">Imagen modal redirección (Mobile)</span>
+            </div>
+            <div class="card-body">
+                <form class="mb-4" [formGroup]="formularioImagenMobile">
+                    <div class="row">
+                        <div class="col">
+                            <fieldset>
+                                <label for="">Imagen</label>
+                                <app-input-archivo formControlName="imagenMobile" nombre="imagenMobile"></app-input-archivo>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex">
+                    <button class="boton-flamingo rojo relleno ms-auto" (click)="guardarImagenMobile()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popup #popup></app-popup>

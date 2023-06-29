@@ -129,12 +129,13 @@
                                 <option value="300">300</option>
                                 <option value="500">500</option>
                                 <option value="1000">1000</option>
+                                <option value="99999999">Todos</option>
                             </select>
                         </span>
                         <span class="texto-gris fs-12px fw-bold d-flex align-items-center">registros</span>
                     </div>
                 </div>
-                <div class="contenedor-tabla d-flex table-responsive ">
+                <div class="contenedor-tabla d-flex table-responsive flamingo-scrollbar">
                     <table class="table border fs-12px" #tablaTrafico>
                         <thead>
                         <tr>
@@ -156,6 +157,11 @@
                                 <td scope="col">{{marcacion.telefonoCliente}}</td>
                                 <td scope="col">{{marcacion.correoCliente}}</td>
                                 <td scope="col">{{marcacion.fecha}}</td>
+                            </tr>
+                            <tr *ngIf="marcaciones.length === 0">
+                                <td class="text-gray text-center" colspan="7">
+                                    No se encontraron registros con estos filtros.
+                                </td>
                             </tr>
                         </tbody>
                     </table>

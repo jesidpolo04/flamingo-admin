@@ -86,6 +86,105 @@
                     </fieldset>
                 </div>
             </div>
+
+            <div class="row mb-2">
+                <div class="col-2">
+                    <fieldset>
+                        <label for="">Transaccional</label>
+                        <div class="mt-2 ms-3">
+                            <label class="switch">
+                                <input #transaccional type="checkbox" formControlName="transaccional">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-5">
+                    <fieldset>
+                        <label>¿Quienes somos?</label>
+                        <textarea type="number" class="form-control" formControlName="quienesSomos" disable></textarea>
+                    </fieldset>
+                </div>
+                <div class="col-5">
+                    <fieldset>
+                        <label>Servicios</label>
+                        <textarea type="number" class="form-control" formControlName="servicios"></textarea>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Línea</label>
+                        <input type="text" class="form-control" formControlName="linea">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['linea'].invalid && 
+                            this.formulario.controls['linea'].dirty">
+                            Línea requerida.
+                        </span>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Whatsapp</label>
+                        <input type="text" class="form-control" formControlName="whatsapp">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['whatsapp'].invalid && 
+                            this.formulario.controls['whatsapp'].dirty">
+                            Whatsapp requerido.
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <fieldset>
+                        <label for="">Imagen personalizada modal de redirección</label>
+                        <div class="mt-2 ms-3">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="imagenPersonalizada">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-5">
+                    <fieldset>
+                        <label for="">Imagen modal de redirección (Desktop)</label>
+                        <app-input-archivo nombre="imagenDesktop" formControlName="imagenDesktop"></app-input-archivo>
+                    </fieldset>
+                </div>
+                <div class="col-5">
+                    <fieldset>
+                        <label for="">Imagen modal de redirección (Mobile)</label>
+                        <app-input-archivo nombre="imagenMobile" formControlName="imagenMobile"></app-input-archivo>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Acepta método de pago TC mefia</label>
+                        <div class="mt-2 ms-3">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="mefia">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Acepta método de pago El fiao</label>
+                        <div class="mt-2 ms-3">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="elfiao">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
         </form>
     </div>
     <div class="modal-footer">

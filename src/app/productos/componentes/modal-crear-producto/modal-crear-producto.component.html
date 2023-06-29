@@ -1,0 +1,70 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Crear producto</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+            <div class="row">
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Nombre del producto</label>
+                        <input type="text" class="form-control" formControlName="nombre">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['nombre'].invalid && 
+                            this.formulario.controls['nombre'].dirty">
+                            Nombre requerido.
+                        </span>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Aliado</label>
+                        <select class="form-select" formControlName="aliado">
+                            <option [value]="aliado.id" *ngFor="let aliado of aliados">{{ aliado.nombre }}</option>
+                        </select>
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['aliado'].invalid && 
+                            this.formulario.controls['aliado'].dirty">
+                            Aliado requerido.
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Enlace amigable</label>
+                        <input type="text" class="form-control" formControlName="enlaceAmigable">
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['enlaceAmigable'].invalid && 
+                            this.formulario.controls['enlaceAmigable'].dirty">
+                            Enlace requerido.
+                        </span>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset>
+                        <label for="">Imagen</label>
+                        <app-input-archivo formControlName="imagen"></app-input-archivo>
+                        <span class="validacion"
+                            *ngIf="this.formulario.controls['imagen'].invalid && 
+                            this.formulario.controls['imagen'].dirty">
+                            Selecciona una imagen.
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cerrar</button>
+        <button type="button" class="boton-flamingo rojo relleno" (click)="this.crearProducto()">
+            <img src="assets/img/+.svg" alt=""> 
+            Crear Producto
+        </button>
+    </div>
+</ng-template>
+
+<app-popup #popup></app-popup>
