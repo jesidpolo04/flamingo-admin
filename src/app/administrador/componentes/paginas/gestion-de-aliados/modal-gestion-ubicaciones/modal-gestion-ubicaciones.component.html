@@ -1,0 +1,162 @@
+<ng-template #modal let-modal>
+    <div class="card overflow-hidden">
+        <div class="modal-header">
+            <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Gestionar ubicaciones</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" *ngIf="aliado">
+            <div class="d-flex flex-gap-10 mb-4">
+                <div class="d-flex flex-gap-5 align-items-center">
+                    <span class="fs-14px">Aliado: </span>
+                    <span class="fs-14px fw-bold">{{aliado.nombre}}</span>
+                    <div><img class="logo-aliado" [src]="aliado.logo" alt="logo-aliado"></div>
+                </div>
+            </div>
+            <span class="texto-naranja fs-12px fw-bold">Agregar ubicaciones</span>
+            <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+                <div class="border rounded p-3">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <fieldset>
+                                <label>Nombre ubicación</label>
+                                <input #selectorCategoriaPadre class="form-select" formControlName="nombre"
+                                    placeholder="Nombre ubicación" />
+                                <span class="validacion" *ngIf="
+                                    this.formulario.controls['nombre'].errors &&
+                                    this.formulario.controls['nombre'].errors['required'] && 
+                                    this.formulario.controls['nombre'].dirty">
+                                    El nombre el obligatorio.
+                                </span>
+                            </fieldset>
+                        </div>
+                        <div class="col-4">
+                            <fieldset>
+                                <label>Departamento</label>
+                                <select class="form-select" formControlName="departamento">
+                                    <option value="">Seleccionar</option>
+                                    <option [value]="departamento.codigo" *ngFor="let departamento of departamentos">
+                                        {{ departamento.nombre }}
+                                    </option>
+                                </select>
+                                <span class="validacion" *ngIf="
+                                this.formulario.controls['departamento'].errors &&
+                                this.formulario.controls['departamento'].errors['required'] && 
+                                this.formulario.controls['departamento'].dirty">
+                                    Selecciona una departamento.
+                                </span>
+                            </fieldset>
+                        </div>
+                        <div class="col-4">
+                            <fieldset>
+                                <label>Ciudad</label>
+                                <select class="form-select" formControlName="ciudad">
+                                    <option value="">Seleccionar</option>
+                                    <option [value]="ciudad.codigo" *ngFor="let ciudad of ciudades">
+                                        {{ ciudad.nombre }}
+                                    </option>
+                                </select>
+                                <span class="validacion" *ngIf="
+                                this.formulario.controls['ciudad'].errors &&
+                                this.formulario.controls['ciudad'].errors['required'] && 
+                                this.formulario.controls['ciudad'].dirty">
+                                    Selecciona una ciudad.
+                                </span>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <fieldset>
+                                <label>Coordenadas Latitud</label>
+                                <input type="number" class="form-control" formControlName="latitud"
+                                    placeholder="Latitud" />
+                                <span class="validacion" *ngIf="
+                                    this.formulario.controls['latitud'].errors &&
+                                    this.formulario.controls['latitud'].errors['required'] && 
+                                    this.formulario.controls['latitud'].dirty">
+                                    Latitud requerida.
+                                </span>
+                            </fieldset>
+                        </div>
+                        <div class="col-6">
+                            <fieldset>
+                                <label>Coordenadas Longitud</label>
+                                <input type="number" class="form-control" formControlName="longitud"
+                                    placeholder="Longitud" />
+                                <span class="validacion" *ngIf="
+                                    this.formulario.controls['longitud'].errors &&
+                                    this.formulario.controls['longitud'].errors['required'] &&
+                                    this.formulario.controls['longitud'].dirty">
+                                    Longitud requerida.
+                                </span>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="boton-flamingo naranja relleno" (click)="guardarUbicacion()">Agregar
+                        ubicaiones</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card overflow-hidden">
+        <div class="modal-header">
+            <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Lista de ubicaciones</h4>
+        </div>
+        <div class="modal-body">
+            <div class="contenedor-tabla d-flex table-responsive border rounded-4">
+                <table class="table fs-12px">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre ubicación</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Coordenadas</th>
+                            <th scope="col" colspan="2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ubicacion of ubicaciones; let indice = index">
+                            <td>{{ubicacion.nombre}}</td>
+                            <td>{{ ubicacion.nombreDepartamento }}</td>
+                            <td>{{ubicacion.nombreCiudad}}</td>
+                            <td>{{ ubicacion.latitud }}, {{ ubicacion.longitud }}</td>
+                            <td class="texto-rojo cursor-pointer"
+                                (click)="this.abrirModalActualizar(aliado!, ubicacion)"><img
+                                    src="./assets/img/editar.svg" alt=""></td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="ubicacion.estado"
+                                        (change)="this.cambiarEstadoUbicacion(ubicacion)">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="fs-12px ms-1 fw-semibold" *ngIf="ubicacion.estado">Sí</span>
+                                <span class="fs-12px ms-1 fw-semibold" *ngIf="!ubicacion.estado">No</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex mt-3">
+                <div class="ms-auto">
+                    <ngb-pagination [collectionSize]="this.paginador.totalRegistros ?? 0" [page]="this.paginador.pagina"
+                        [pageSize]="this.paginador.limite" (pageChange)="this.paginador.cambiarPagina($event)">
+                    </ngb-pagination>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="boton-flamingo rojo delineado"
+                (click)="modal.close('Close click')">Cerrar</button>
+            <button (click)="modal.close('Close click')" type="button" class="boton-flamingo rojo relleno">
+                Guardar cambios
+            </button>
+        </div>
+    </div>
+</ng-template>
+<app-modal-actualizar-ubicacion #modalActualizarUbicacion
+    (ubicacionActualizada)="manejarUbicacionActualizada()"></app-modal-actualizar-ubicacion>
+<app-popup #popup></app-popup>

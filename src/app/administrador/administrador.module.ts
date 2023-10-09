@@ -30,6 +30,8 @@ import { ProductosModule } from '../productos/productos.module';
 import { AlertasModule } from '../alertas/alertas.module';
 import { InputsModule } from '../inputs/inputs.module';
 import { ConfiguracionesModule } from '../configuraciones/configuraciones.module';
+import { ModalGestionUbicacionesComponent } from './componentes/paginas/gestion-de-aliados/modal-gestion-ubicaciones/modal-gestion-ubicaciones.component';
+import { ModalActualizarUbicacionComponent } from './componentes/paginas/gestion-de-aliados/modal-actualizar-ubicacion/modal-actualizar-ubicacion.component';
 
 
 
@@ -54,6 +56,8 @@ import { ConfiguracionesModule } from '../configuraciones/configuraciones.module
     ModalCreacionUsuarioComponent,
     ModalActualizacionUsuarioComponent,
     SeccionDeMenuComponent,
+    ModalGestionUbicacionesComponent,
+    ModalActualizarUbicacionComponent,
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,7 @@ import { PopupComponent } from '../../popup/popup.component';
 import { ModalActualizacionAliadoComponent } from './modal-actualizacion-aliado/modal-actualizacion-aliado.component';
 import { ModalCreacionAliadoComponent } from './modal-creacion-aliado/modal-creacion-aliado.component';
 import { ModalGestionCategoriasAliadoComponent } from './modal-gestion-categorias-aliado/modal-gestion-categorias-aliado.component';
+import { ModalGestionUbicacionesComponent } from './modal-gestion-ubicaciones/modal-gestion-ubicaciones.component';
 
 @Component({
   selector: 'app-gestion-de-aliados',
@@ -20,6 +21,7 @@ export class GestionDeAliadosComponent implements OnInit {
   @ViewChild('modalCreacionAliado') modalCreacionAliado!:ModalCreacionAliadoComponent
   @ViewChild('modalActualizacionAliado') modalActualizacionAliado!:ModalActualizacionAliadoComponent
   @ViewChild('modalGestionCategorias') modalGestionCategorias!:ModalGestionCategoriasAliadoComponent
+  @ViewChild('modalGestionUbicaciones') modalGestionUbicaciones!:ModalGestionUbicacionesComponent
   public pagina = 1;
   public limite = 5;
   public total = 0;
@@ -77,6 +79,10 @@ export class GestionDeAliadosComponent implements OnInit {
 
   public abrirModalGestionCategorias(aliado:Aliado){
     this.modalGestionCategorias.abrir(aliado)
+  }
+
+  public abrirModalGestionUbicaciones(aliado: Aliado){
+    this.modalGestionUbicaciones.abrir(aliado)
   }
 
   public copiarAlPortapapeles(texto:string){

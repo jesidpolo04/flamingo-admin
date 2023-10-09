@@ -44,7 +44,7 @@
                               <th scope="col">Activo</th>
                               <th scope="col" colspan="2">Enlace de marcación</th>
                               <th scope="col">Fecha de creación</th>
-                              <th scope="col" colspan="2">Acciones</th>
+                              <th scope="col" colspan="3">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,6 +66,7 @@
                                 <td>{{aliado.creacion}}</td>
                                 <td><span class="texto-rojo fw-bolder" (click)="this.abrirModalActualizacionAliado(aliado)">Editar</span></td>
                                 <td><span class="texto-rojo fw-bolder" (click)="this.abrirModalGestionCategorias(aliado)">Gestionar Categorías</span></td>
+                                <td><span class="texto-rojo fw-bolder" (click)="this.abrirModalGestionUbicaciones(aliado)">Ubicaciones</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -92,6 +93,7 @@
     #modalActualizacionAliado
     (seHaActualizadoUnAliado)="this.refrescarListaDeAliados()"></app-modal-actualizacion-aliado>
 <app-modal-gestion-categorias-aliado #modalGestionCategorias></app-modal-gestion-categorias-aliado>
+<app-modal-gestion-ubicaciones #modalGestionUbicaciones></app-modal-gestion-ubicaciones>
 
 <swal #popupExitoso></swal>
 <swal #fallido></swal>
