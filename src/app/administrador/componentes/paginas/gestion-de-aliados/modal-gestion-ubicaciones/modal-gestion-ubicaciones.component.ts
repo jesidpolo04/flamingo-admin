@@ -30,6 +30,7 @@ export class ModalGestionUbicacionesComponent implements OnInit {
   ciudades: Ciudad[] = []
   ubicaciones: Ubicacion[] = []
   paginador: Paginador<FiltrosUbicaciones>
+  terminoBusqueda: string = ""
 
   constructor(private servicioModal: NgbModal, private servicioUbicacion: ServicioUbicaciones) {
     this.paginador = new Paginador<FiltrosUbicaciones>(this.obtenerUbicaciones)
@@ -147,6 +148,13 @@ export class ModalGestionUbicacionesComponent implements OnInit {
 
   manejarUbicacionActualizada(){
     this.paginador.refrescar()
+  }
+
+  actualizarFiltros(){
+    this.paginador.filtrar({
+      idAliado: this.aliado!.id,
+      termino: this.terminoBusqueda
+    })
   }
 
 }
