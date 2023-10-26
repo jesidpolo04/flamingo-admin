@@ -38,8 +38,8 @@ export class ModalGestionUbicacionesComponent implements OnInit {
       nombre: new FormControl("", [ Validators.required ]),
       departamento: new FormControl("", [ Validators.required ]),
       ciudad: new FormControl("", [ Validators.required ]),
-      latitud: new FormControl("", [ Validators.required ]),
-      longitud: new FormControl("", [ Validators.required ]),
+      latitud: new FormControl("", [ Validators.required, Validators.pattern(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/) ]),
+      longitud: new FormControl("", [ Validators.required, Validators.pattern(/^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/) ]),
     })
   }
 
