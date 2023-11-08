@@ -1,0 +1,105 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Gestionar ubicaciones</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" *ngIf="aliado">
+        <div class="d-flex flex-gap-10 mb-4">
+            <div class="d-flex flex-gap-5 align-items-center">
+                <span class="fs-14px">Aliado: </span>
+                <span class="fs-14px fw-bold">{{aliado.nombre}}</span>
+                <div><img class="logo-aliado" [src]="aliado.logo" alt="logo-aliado"></div>
+            </div>
+        </div>
+        <span class="texto-naranja fs-12px fw-bold">Editar ubicación</span>
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+            <div class="border rounded p-3">
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <fieldset>
+                            <label>Nombre ubicación</label>
+                            <input #selectorCategoriaPadre class="form-select" formControlName="nombre"
+                                placeholder="Nombre ubicación" />
+                            <span class="validacion" *ngIf="
+                                this.formulario.controls['nombre'].errors &&
+                                this.formulario.controls['nombre'].errors['required'] && 
+                                this.formulario.controls['nombre'].dirty">
+                                El nombre el obligatorio.
+                            </span>
+                        </fieldset>
+                    </div>
+                    <div class="col-4">
+                        <fieldset>
+                            <label>Departamento</label>
+                            <select class="form-select" formControlName="departamento">
+                                <option value="">Seleccionar</option>
+                                <option [value]="departamento.codigo" *ngFor="let departamento of departamentos">
+                                    {{ departamento.nombre }}
+                                </option>
+                            </select>
+                            <span class="validacion" *ngIf="
+                            this.formulario.controls['departamento'].errors &&
+                            this.formulario.controls['departamento'].errors['required'] && 
+                            this.formulario.controls['departamento'].dirty">
+                                Selecciona una departamento.
+                            </span>
+                        </fieldset>
+                    </div>
+                    <div class="col-4">
+                        <fieldset>
+                            <label>Ciudad</label>
+                            <select class="form-select" formControlName="ciudad">
+                                <option value="">Seleccionar</option>
+                                <option [value]="ciudad.codigo" *ngFor="let ciudad of ciudades">
+                                    {{ ciudad.nombre }}
+                                </option>
+                            </select>
+                            <span class="validacion" *ngIf="
+                            this.formulario.controls['ciudad'].errors &&
+                            this.formulario.controls['ciudad'].errors['required'] && 
+                            this.formulario.controls['ciudad'].dirty">
+                                Selecciona una ciudad.
+                            </span>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <fieldset>
+                            <label>Coordenadas Latitud</label>
+                            <input type="number" class="form-control" formControlName="latitud" placeholder="Latitud" />
+                            <span class="validacion" *ngIf="
+                                this.formulario.controls['latitud'].errors &&
+                                this.formulario.controls['latitud'].errors['required'] && 
+                                this.formulario.controls['latitud'].dirty">
+                                Latitud requerida.
+                            </span>
+                        </fieldset>
+                    </div>
+                    <div class="col-6">
+                        <fieldset>
+                            <label>Coordenadas Longitud</label>
+                            <input type="number" class="form-control" formControlName="longitud"
+                                placeholder="Longitud" />
+                            <span class="validacion" *ngIf="
+                                this.formulario.controls['longitud'].errors &&
+                                this.formulario.controls['longitud'].errors['required'] &&
+                                this.formulario.controls['longitud'].dirty">
+                                Longitud requerida.
+                            </span>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cerrar</button>
+        <button type="button" class="boton-flamingo rojo relleno" (click)="actualizarUbicacion()">
+            Guardar cambios
+        </button>
+    </div>
+</ng-template>
+
+<app-popup #popup></app-popup>

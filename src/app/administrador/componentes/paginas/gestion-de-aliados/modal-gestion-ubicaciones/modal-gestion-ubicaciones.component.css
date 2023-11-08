@@ -1,0 +1,24 @@
+.logo-aliado{
+    height: 40px;
+    width: auto;
+}
+::ng-deep .modal-dividido .modal-content{
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: none;
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+    gap: 10px
+}
+
+::ng-deep .modal-dividido .modal-content .modal-body{
+    background-color: white;
+}
+::ng-deep .modal-dividido .modal-content .modal-header{
+    background-color: white;
+}
+::ng-deep .modal-dividido .modal-content .modal-footer{
+    background-color: white;
+}
